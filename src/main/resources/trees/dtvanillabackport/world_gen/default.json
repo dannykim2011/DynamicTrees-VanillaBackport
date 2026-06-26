@@ -1,0 +1,19 @@
+[
+  {
+    "only_if_loaded": "vanillabackport",
+    "select": {
+      "name": "minecraft:pale_garden"
+    },
+    "apply": {
+      "species": "dtvanillabackport:pale_oak",
+      "density": {
+        "math": {
+          "div": ["noise", 3]
+        }
+      },
+      "chance": 1,
+      "forestness": 1,
+      "multipass": true
+    }
+  }
+]

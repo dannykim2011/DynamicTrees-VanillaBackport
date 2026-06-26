@@ -1,0 +1,12 @@
+{
+  "sources": [
+    {
+      "type": "dynamictrees:thick_branch_rings",
+      "resource": "minecraft:block/pale_oak_log_top"
+    },
+    {
+      "type": "dynamictrees:thick_branch_rings",
+      "resource": "minecraft:block/stripped_pale_oak_log_top"
+    }
+  ]
+}

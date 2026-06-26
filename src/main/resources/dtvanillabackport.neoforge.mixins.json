@@ -1,0 +1,12 @@
+﻿{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.dannykim.dtvanillabackport.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "MixinCreakingHeartBlock"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

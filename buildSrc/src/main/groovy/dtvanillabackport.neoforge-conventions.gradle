@@ -1,0 +1,123 @@
+import java.time.Instant
+import java.time.format.DateTimeFormatter
+
+plugins {
+    id 'java-library'
+    id 'net.neoforged.moddev'
+    id 'idea'
+    id 'maven-publish'
+}
+
+def prop = { key -> project.findProperty(key).toString() }
+
+def modId = prop('modId')
+def modVersion = prop('modVersion')
+def mcVersion = prop('mcVersion')
+
+version = "${mcVersion}-${modVersion}"
+group = prop('group')
+
+base {
+    archivesName = modId
+}
+
+repositories {
+    maven {
+        url = 'https://www.cursemaven.com'
+        content { includeGroup 'curse.maven' }
+    }
+    maven {
+        url = 'https://api.modrinth.com/maven'
+        content { includeGroup 'maven.modrinth' }
+    }
+    maven { url = 'https://maven.parchmentmc.org' }
+    mavenCentral()
+}
+
+neoForge {
+    version = prop('neoForgeVersion')
+
+    parchment {
+        minecraftVersion = mcVersion
+        mappingsVersion = prop('mappingsVersion')
+    }
+
+    runs {
+        configureEach {
+            logLevel = org.slf4j.event.Level.DEBUG
+            systemProperty 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+        }
+
+        client {
+            client()
+            gameDirectory = file('run')
+        }
+
+        server {
+            server()
+            gameDirectory = file('run-server')
+        }
+
+        data {
+            data()
+            gameDirectory = file('run')
+            programArguments.addAll(
+                    '--mod', modId,
+                    '--all',
+                    '--output', file('src/generated/resources').absolutePath,
+                    '--existing', file('src/main/resources').absolutePath,
+                    '--existing-mod', 'dynamictrees',
+                    '--existing-mod', 'vanillabackport'
+            )
+        }
+    }
+
+    mods {
+        "${modId}" {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+sourceSets.main.resources {
+    srcDir 'src/generated/resources'
+}
+
+dependencies {
+    implementation "curse.maven:dynamictrees-252818:${prop('dynamicTreesFileId')}"
+    implementation files("gradle/libs/VanillaBackport-neoforge-1.21.1-${prop('vanillaBackportVersion')}.jar")
+    implementation files("gradle/libs/Platform-neoforge-1.21.1-${prop('platformVersion')}.jar")
+}
+
+tasks.named('processResources') {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+tasks.withType(Jar).configureEach {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+tasks.named('jar') {
+    manifest {
+        attributes(
+                'Specification-Title': project.name,
+                'Specification-Vendor': 'Dynamic Trees Team',
+                'Specification-Version': '1',
+                'Implementation-Title': project.name,
+                'Implementation-Version': project.version,
+                'Implementation-Vendor': 'Dynamic Trees Team',
+                'Implementation-Timestamp': DateTimeFormatter.ISO_INSTANT.format(Instant.now())
+        )
+    }
+}
+
+java {
+    withSourcesJar()
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+tasks.withType(GenerateModuleMetadata).configureEach {
+    enabled = false
+}
