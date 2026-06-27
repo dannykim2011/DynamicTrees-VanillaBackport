@@ -1,4 +1,4 @@
-# Dynamic Trees–VanillaBackport
+# Dynamic Tree–VanillaBackport
 
 Bring Dynamic Trees support to the Pale Oak tree added by VanillaBackport.
 
