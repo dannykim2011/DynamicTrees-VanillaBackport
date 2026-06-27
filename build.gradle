@@ -1,3 +1,25 @@
 plugins {
     id 'dtvanillabackport.neoforge-conventions'
 }
+
+def prop = { key -> project.findProperty(key).toString() }
+
+dependencies {
+    implementation "maven.modrinth:vdjF5PL5:${prop('dynamicTreesVersionId')}"
+    implementation "maven.modrinth:6xwxDTgf:${prop('vanillaBackportVersionId')}"
+    implementation "maven.modrinth:i6fiqm5y:${prop('platformVersionId')}"
+}
+
+tasks.named('jar') {
+    manifest {
+        attributes(
+                'Specification-Title': project.name,
+                'Specification-Vendor': 'dannykim',
+                'Specification-Version': '1',
+                'Implementation-Title': project.name,
+                'Implementation-Version': project.version,
+                'Implementation-Vendor': 'dannykim',
+                'Implementation-Timestamp': java.time.format.DateTimeFormatter.ISO_INSTANT.format(java.time.Instant.now())
+        )
+    }
+}

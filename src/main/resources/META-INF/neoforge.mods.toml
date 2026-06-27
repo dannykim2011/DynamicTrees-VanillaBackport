@@ -6,7 +6,7 @@ license="MIT"
 modId="dtvanillabackport"
 version="${file.jarVersion}"
 displayName="Dynamic Trees for Vanilla Backport"
-authors="Dynamic Trees Team"
+authors="dannykim"
 description='''
 Adds Dynamic Pale Oak trees and Pale Garden integration for Vanilla Backport.
 '''

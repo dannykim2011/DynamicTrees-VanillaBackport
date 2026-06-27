@@ -1,5 +1,3 @@
-import java.time.Instant
-import java.time.format.DateTimeFormatter
 
 plugins {
     id 'java-library'
@@ -22,10 +20,6 @@ base {
 }
 
 repositories {
-    maven {
-        url = 'https://www.cursemaven.com'
-        content { includeGroup 'curse.maven' }
-    }
     maven {
         url = 'https://api.modrinth.com/maven'
         content { includeGroup 'maven.modrinth' }
@@ -83,32 +77,12 @@ sourceSets.main.resources {
     srcDir 'src/generated/resources'
 }
 
-dependencies {
-    implementation "curse.maven:dynamictrees-252818:${prop('dynamicTreesFileId')}"
-    implementation files("gradle/libs/VanillaBackport-neoforge-1.21.1-${prop('vanillaBackportVersion')}.jar")
-    implementation files("gradle/libs/Platform-neoforge-1.21.1-${prop('platformVersion')}.jar")
-}
-
 tasks.named('processResources') {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 tasks.withType(Jar).configureEach {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-}
-
-tasks.named('jar') {
-    manifest {
-        attributes(
-                'Specification-Title': project.name,
-                'Specification-Vendor': 'Dynamic Trees Team',
-                'Specification-Version': '1',
-                'Implementation-Title': project.name,
-                'Implementation-Version': project.version,
-                'Implementation-Vendor': 'Dynamic Trees Team',
-                'Implementation-Timestamp': DateTimeFormatter.ISO_INSTANT.format(Instant.now())
-        )
-    }
 }
 
 java {
