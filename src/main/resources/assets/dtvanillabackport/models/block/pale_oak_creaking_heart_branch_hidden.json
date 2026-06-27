@@ -1,4 +1,4 @@
-﻿{
+{
   "loader": "dynamictrees:branch",
   "textures": {
     "bark": "minecraft:block/pale_oak_log",

@@ -1,4 +1,4 @@
-﻿{
+{
   "loader": "dynamictrees:branch",
   "textures": {
     "bark": "minecraft:block/creaking_heart_awake",
