@@ -1,11 +1,17 @@
-# Dynamic Trees for Vanilla Backport
+# Dynamic Trees – VanillaBackport
 
-NeoForge 1.21.1 add-on for Dynamic Trees and Vanilla Backport.
+Bring Dynamic Trees support to the Pale Oak tree added by VanillaBackport.
 
-This project contains only the Pale Oak integration extracted from the
-Minecraft 26.1 Dynamic Trees source:
+This addon integrates VanillaBackport's Pale Oak with Dynamic Trees, allowing it to behave just like a native Dynamic Trees species. Instead of using the standard vanilla tree system, Pale Oak will grow, branch, and interact with the world using Dynamic Trees' mechanics while preserving the gameplay experience intended by VanillaBackport.
 
-- maps `minecraft:pale_garden` to dynamic Pale Oak instead of normal oak;
-- adds Pale Oak family, species, leaves and JoCodes;
-- keeps the Creaking Heart inside the Dynamic Trees branch network;
-- delegates Creaking spawning and resin behavior to Vanilla Backport.
+## Features
+
+- 🌳 **Dynamic Trees compatibility for VanillaBackport's Pale Oak** – Makes Pale Oak grow, branch, and behave like a native Dynamic Trees species.
+- ❤️ **Full Creaking Heart support** – Creaking Hearts generate and function naturally with Dynamic Trees' Pale Oak, preserving VanillaBackport's intended gameplay and mechanics.
+- 🌱 **Seamless integration** – Includes Dynamic Trees features such as dynamic growth, falling trees, seeds, saplings, and world generation compatibility.
+- ⚡ **Lightweight compatibility addon** – Focused solely on integrating VanillaBackport with Dynamic Trees without changing other gameplay.
+
+## Requirements
+
+- Dynamic Trees
+- VanillaBackport

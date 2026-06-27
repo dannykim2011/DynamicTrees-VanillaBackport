@@ -7,6 +7,7 @@ import com.dtteam.dynamictrees.systems.genfeature.GenFeature;
 import com.dtteam.dynamictrees.systems.genfeature.GenFeatureConfiguration;
 import com.dtteam.dynamictrees.systems.genfeature.context.PostGenerationContext;
 import com.dtteam.dynamictrees.systems.genfeature.context.PostGrowContext;
+import com.dtteam.dynamictrees.systems.growthlogic.context.PositionalSpeciesContext;
 import com.dtteam.dynamictrees.tree.TreeHelper;
 import com.dannykim.dtvanillabackport.block.CreakingHeartBranchBlock;
 import com.dannykim.dtvanillabackport.tree.CreakingHeartFamily;
@@ -27,7 +28,7 @@ public class CreakingHeartGenFeature extends GenFeature {
 
     @Override
     protected void registerProperties() {
-        this.register(MAX_HEIGHT, MAX_RADIUS, MIN_RADIUS, PLACE_CHANCE);
+        this.register(MAX_HEIGHT, MAX_RADIUS, MIN_RADIUS, PLACE_CHANCE, FRUITING_RADIUS);
     }
 
     @Override
@@ -36,7 +37,8 @@ public class CreakingHeartGenFeature extends GenFeature {
                 .with(MAX_HEIGHT, 8)
                 .with(MAX_RADIUS, 8)
                 .with(MIN_RADIUS, 6)
-                .with(PLACE_CHANCE, 1.0F);
+                .with(PLACE_CHANCE, 0.2F)
+                .with(FRUITING_RADIUS, 14);
     }
 
     @Override
@@ -57,11 +59,21 @@ public class CreakingHeartGenFeature extends GenFeature {
         }
 
         final LevelAccessor level = context.level();
+        if (TreeHelper.getRadius(level, context.pos().above()) < configuration.get(FRUITING_RADIUS)) {
+            return false;
+        }
+
         final BranchBlock heart = heartFamily.getHeartBranch().get();
         final int maxHeight = configuration.get(MAX_HEIGHT);
+        final int lowestBranchHeight = context.species().getGrowthLogicKit().getLowestBranchHeight(
+                new PositionalSpeciesContext(context.levelContext().level(), context.pos(), context.species())
+        );
 
         for (int y = 1; y < maxHeight; y++) {
-            final BlockPos testPos = context.pos().above(y);
+            if (lowestBranchHeight + y > maxHeight) {
+                return false;
+            }
+            final BlockPos testPos = context.pos().above(lowestBranchHeight + y);
             final BlockState testState = level.getBlockState(testPos);
             if (!TreeHelper.isBranch(testState)) {
                 return false;
