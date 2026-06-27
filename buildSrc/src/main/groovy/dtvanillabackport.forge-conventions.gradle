@@ -1,0 +1,88 @@
+plugins {
+    id 'java-library'
+    id 'net.minecraftforge.gradle'
+    id 'idea'
+    id 'maven-publish'
+}
+
+def prop = { key -> project.findProperty(key).toString() }
+def modId = prop('modId')
+def mcVersion = prop('mcVersion')
+
+version = "${mcVersion}-${prop('modVersion')}"
+group = prop('group')
+
+base {
+    archivesName = modId
+}
+
+repositories {
+    maven {
+        url = 'https://api.modrinth.com/maven'
+        content { includeGroup 'maven.modrinth' }
+    }
+    mavenCentral()
+}
+
+minecraft {
+    mappings channel: 'official', version: mcVersion
+
+    runs {
+        configureEach {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            property 'mixin.env.disableRefMap', 'true'
+
+            mods {
+                "${modId}" {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        client {}
+
+        server {
+            workingDirectory project.file('run-server')
+            args '--nogui'
+        }
+
+        data {
+            workingDirectory project.file('run')
+            args '--mod', modId,
+                    '--all',
+                    '--output', file('src/generated/resources').absolutePath,
+                    '--existing', file('src/main/resources').absolutePath,
+                    '--existing-mod', 'dynamictrees',
+                    '--existing-mod', 'vanillabackport'
+        }
+    }
+}
+
+sourceSets.main.resources {
+    srcDir 'src/generated/resources'
+}
+
+dependencies {
+    minecraft "net.minecraftforge:forge:${mcVersion}-${prop('forgeVersion')}"
+}
+
+tasks.named('processResources') {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+tasks.withType(Jar).configureEach {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+java {
+    withSourcesJar()
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+tasks.withType(GenerateModuleMetadata).configureEach {
+    enabled = false
+}

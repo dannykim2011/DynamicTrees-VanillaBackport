@@ -1,0 +1,8 @@
+{
+  "primitive_leaves": "minecraft:pale_oak_leaves",
+  "cell_kit": "dynamictrees:dark_oak",
+  "smother": 3,
+  "texture_overrides": {
+    "leaves": "minecraft:block/pale_oak_leaves"
+  }
+}

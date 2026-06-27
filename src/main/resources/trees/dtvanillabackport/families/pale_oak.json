@@ -1,0 +1,10 @@
+{
+  "type": "dtvanillabackport:creaking_heart",
+  "common_leaves": "dtvanillabackport:pale_oak",
+  "common_species": "dtvanillabackport:pale_oak",
+  "primitive_log": "minecraft:pale_oak_log",
+  "primitive_stripped_log": "minecraft:stripped_pale_oak_log",
+  "max_branch_radius": 24,
+  "max_signal_depth": 64,
+  "generate_surface_root": true
+}

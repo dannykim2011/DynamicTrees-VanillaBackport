@@ -1,0 +1,5 @@
+// 1.20.1	2026-06-27T21:15:53.6622575	dtvanillabackport DT Block Tags
+57c9adaa580c6a1117994da83c40183784e3bdd4 data/dynamictrees/tags/blocks/branches_that_burn.json
+16dcba63147614cc0fa117f2b18ae014dd4de621 data/dynamictrees/tags/blocks/leaves.json
+db01956a6f63614f10b98e859911cb1e13b0961a data/dynamictrees/tags/blocks/saplings.json
+ee85dfaf581fa49c786f52dcfe4d8bf579361688 data/dynamictrees/tags/blocks/stripped_branches_that_burn.json

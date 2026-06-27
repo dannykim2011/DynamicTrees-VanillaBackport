@@ -1,0 +1,7 @@
+// 1.20.1	2026-06-27T21:15:53.6622575	Loot Tables
+ba3762e209c769ff3a4356e4de1dce16f0c80d7a data/dtvanillabackport/loot_tables/blocks/pale_oak_leaves.json
+f09205a116f7f60c91ec0149ccedae1cdb0920d1 data/dtvanillabackport/loot_tables/trees/branches/pale_oak.json
+748f33e087f8c9015a8213121f1d263eac180073 data/dtvanillabackport/loot_tables/trees/branches/pale_oak_creaking_heart.json
+c64718963ec0137c137b74bed2af78e61b177ad0 data/dtvanillabackport/loot_tables/trees/branches/stripped_pale_oak.json
+030859b60c8aa2b7136503fdc30ba131697ccc46 data/dtvanillabackport/loot_tables/trees/leaves/pale_oak.json
+7365a195327f13a3ff0379ffec9e8afc136590d8 data/dtvanillabackport/loot_tables/trees/voluntary/pale_oak.json

@@ -1,0 +1,47 @@
+{
+  "family": "dtvanillabackport:pale_oak",
+  "tapering": 0.3,
+  "signal_energy": 18.0,
+  "up_probability": 4,
+  "lowest_branch_height": 6,
+  "growth_rate": 0.8,
+  "soil_longevity": 14,
+  "max_branch_radius": 24,
+  "growth_logic_kit": "dark_oak",
+  "leaves_properties": "dtvanillabackport:pale_oak",
+  "preferred_climate": "temperate",
+  "climate_tolerance": 0.6,
+  "primitive_sapling": "minecraft:pale_oak_sapling",
+  "features": [
+    {
+      "name": "clear_volume",
+      "properties": {
+        "height": 6
+      }
+    },
+    "bottom_flare",
+    "mound",
+    "roots",
+    {
+      "name": "vines",
+      "properties": {
+        "vine_type": "ceiling",
+        "block": "minecraft:pale_hanging_moss",
+        "max_length": 8,
+        "quantity": 24
+      }
+    },
+    {
+      "name": "dtvanillabackport:creaking_heart",
+      "properties": {
+        "place_chance": 0.4,
+        "min_radius": 6,
+        "max_radius": 8,
+        "max_height": 8
+      }
+    }
+  ],
+  "lang_overrides": {
+    "seed": "Pale Oak Acorn"
+  }
+}

@@ -1,0 +1,13 @@
+plugins {
+    id 'groovy-gradle-plugin'
+}
+
+repositories {
+    maven { url = 'https://maven.minecraftforge.net' }
+    gradlePluginPortal()
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'net.minecraftforge.gradle:ForgeGradle:6.0.42'
+}

@@ -1,0 +1,27 @@
+plugins {
+    id 'dtvanillabackport.forge-conventions'
+}
+
+def prop = { key -> project.findProperty(key).toString() }
+
+dependencies {
+    implementation fg.deobf("maven.modrinth:vdjF5PL5:${prop('dynamicTreesVersionId')}")
+    implementation fg.deobf("maven.modrinth:6xwxDTgf:${prop('vanillaBackportVersionId')}")
+    implementation fg.deobf("maven.modrinth:i6fiqm5y:${prop('platformVersionId')}")
+}
+
+tasks.named('jar') {
+    finalizedBy 'reobfJar'
+    manifest {
+        attributes(
+                'Specification-Title': project.name,
+                'Specification-Vendor': prop('modAuthor'),
+                'Specification-Version': '1',
+                'Implementation-Title': project.name,
+                'Implementation-Version': project.version,
+                'Implementation-Vendor': prop('modAuthor'),
+                'Implementation-Timestamp': java.time.format.DateTimeFormatter.ISO_INSTANT.format(java.time.Instant.now()),
+                'MixinConfigs': 'dtvanillabackport.mixins.json'
+        )
+    }
+}
