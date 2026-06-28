@@ -10,6 +10,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -67,9 +69,41 @@ public class CreakingHeartBranchBlock extends BasicBranchBlock implements Entity
                             : previousHeartState)
                     .setValue(HIDDEN, previousHidden), flags);
         }
+        level.scheduleTick(pos, this, 1);
         return result;
     }
 
+    @Override
+    public BlockState updateShape(
+            final BlockState state,
+            final Direction direction,
+            final BlockState neighbourState,
+            final LevelAccessor level,
+            final BlockPos pos,
+            final BlockPos neighbourPos
+    ) {
+        level.scheduleTick(pos, this, 1);
+        return super.updateShape(state, direction, neighbourState, level, pos, neighbourPos);
+    }
+
+    @Override
+    public void tick(final BlockState state, final ServerLevel level, final BlockPos pos, final RandomSource random) {
+        final BlockState updatedState;
+        if (!hasRequiredLogs(state, level, pos)) {
+            updatedState = state.setValue(STATE, CreakingHeartState.UPROOTED);
+        } else {
+            updatedState = state.setValue(
+                    STATE,
+                    CreakingHeartBlock.isNaturalNight(level)
+                            ? CreakingHeartState.AWAKE
+                            : CreakingHeartState.DORMANT
+            );
+        }
+        if (updatedState != state) {
+            level.setBlock(pos, updatedState, 3);
+        }
+        level.scheduleTick(pos, this, 20);
+    }
     public static boolean hasRequiredLogs(final BlockState state, final LevelReader level, final BlockPos pos) {
         int count = 0;
         for (Direction direction : Direction.values()) {

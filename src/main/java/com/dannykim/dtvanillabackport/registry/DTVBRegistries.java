@@ -10,6 +10,7 @@ import com.dannykim.dtvanillabackport.DynamicTreesVanillaBackport;
 import com.dannykim.dtvanillabackport.block.CreakingHeartBranchBlock;
 import com.dannykim.dtvanillabackport.block.CreakingHeartBranchBlockEntity;
 import com.dannykim.dtvanillabackport.genfeature.CreakingHeartGenFeature;
+import com.dannykim.dtvanillabackport.genfeature.VineGenFeature2;
 import com.dannykim.dtvanillabackport.tree.CreakingHeartFamily;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.SoundType;
@@ -39,6 +40,8 @@ public final class DTVBRegistries {
     public static final GenFeature CREAKING_HEART_GEN_FEATURE =
             new CreakingHeartGenFeature(DynamicTreesVanillaBackport.location("creaking_heart"));
 
+    public static final GenFeature VINE_GEN_FEATURE_2 =
+            new VineGenFeature2(DynamicTreesVanillaBackport.location("vine_gen_feature_2"));
     private DTVBRegistries() {
     }
 
@@ -64,5 +67,6 @@ public final class DTVBRegistries {
     @SubscribeEvent
     public static void registerGenFeatures(final RegistryEvent<GenFeature> event) {
         event.getRegistry().register(CREAKING_HEART_GEN_FEATURE);
+        event.getRegistry().register(VINE_GEN_FEATURE_2);
     }
 }

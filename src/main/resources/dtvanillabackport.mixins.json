@@ -4,7 +4,9 @@
   "package": "com.dannykim.dtvanillabackport.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "MixinCreakingHeartBlock"
+    "MixinCreakingHeartBlock",
+    "MixinCreakingHeartBlockEntity",
+    "MixinMultifaceBlock"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -9,9 +9,12 @@ import com.ferreusveritas.dynamictrees.tree.family.Family;
 import com.ferreusveritas.dynamictrees.tree.species.Species;
 import com.ferreusveritas.dynamictrees.resources.Resources;
 import com.dannykim.dtvanillabackport.registry.DTVBRegistries;
+import com.dannykim.dtvanillabackport.client.ClientModEvents;
 import com.dannykim.dtvanillabackport.tree.CreakingHeartFamily;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -23,6 +26,7 @@ public final class DynamicTreesVanillaBackport {
 
     public DynamicTreesVanillaBackport() {
         final IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> ClientModEvents::registerSpriteSource);
         RegistryHandler.setup(MOD_ID);
         DTVBRegistries.setup();
         DTVBRegistries.BLOCK_ENTITY_TYPES.register(eventBus);

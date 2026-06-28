@@ -23,7 +23,7 @@
     "mound",
     "roots",
     {
-      "name": "vines",
+      "name": "dtvanillabackport:vine_gen_feature_2",
       "properties": {
         "vine_type": "ceiling",
         "block": "minecraft:pale_hanging_moss",
