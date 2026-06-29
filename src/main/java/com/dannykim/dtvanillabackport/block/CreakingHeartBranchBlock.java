@@ -31,6 +31,7 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.FluidState;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Optional;
 
 public class CreakingHeartBranchBlock extends ThickBranchBlock implements EntityBlock {
@@ -198,5 +199,14 @@ public class CreakingHeartBranchBlock extends ThickBranchBlock implements Entity
         return Optional.of(BuiltInRegistries.BLOCK.get(
                 ResourceLocation.fromNamespaceAndPath("minecraft", "creaking_heart")
         ));
+    }
+
+    @Override
+    public float getPrimitiveLogs(final float volume, final List<ItemStack> drops) {
+        final int wholeVolume = (int) volume;
+        if (wholeVolume > 0) {
+            this.getPrimitiveLog().ifPresent(block -> drops.add(new ItemStack(block)));
+        }
+        return volume - wholeVolume;
     }
 }
