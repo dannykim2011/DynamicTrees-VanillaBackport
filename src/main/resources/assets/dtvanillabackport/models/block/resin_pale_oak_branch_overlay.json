@@ -1,0 +1,9 @@
+{
+  "loader": "dynamictrees:branch",
+  "family": "dtvanillabackport:pale_oak",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "bark": "minecraft:block/resin_clump",
+    "rings": "dynamictrees:block/air"
+  }
+}

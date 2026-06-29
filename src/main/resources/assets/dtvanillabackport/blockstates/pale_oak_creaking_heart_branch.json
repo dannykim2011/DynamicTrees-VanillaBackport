@@ -10,6 +10,15 @@
     },
     {
       "apply": {
+        "model": "dtvanillabackport:block/resin_pale_oak_branch_overlay"
+      },
+      "when": {
+        "hidden": "true",
+        "resin": "true"
+      }
+    },
+    {
+      "apply": {
         "model": "dtvanillabackport:block/pale_oak_creaking_heart_branch_awake"
       },
       "when": {

@@ -18,6 +18,7 @@ public class CreakingHeartFamily extends Family {
     public static final TypedRegistry.EntryType<Family> TYPE = TypedRegistry.newType(CreakingHeartFamily::new);
 
     private Supplier<BranchBlock> heartBranch;
+    private Supplier<BranchBlock> resinBranch;
     private Block primitiveHeart = Blocks.AIR;
 
     public CreakingHeartFamily(final ResourceLocation name) {
@@ -31,6 +32,7 @@ public class CreakingHeartFamily extends Family {
                 ResourceLocation.fromNamespaceAndPath("minecraft", "creaking_heart")
         );
         this.heartBranch = DTVBRegistries.CREAKING_HEART_BRANCH;
+        this.resinBranch = DTVBRegistries.RESIN_BRANCH;
     }
 
     public void bindHeartBranch() {
@@ -38,10 +40,19 @@ public class CreakingHeartFamily extends Family {
         branch.setFamily(this);
         branch.setPrimitiveLogDrops(new ItemStack(this.primitiveHeart));
         this.addValidBranches(branch);
+
+        final BranchBlock resin = this.resinBranch.get();
+        resin.setFamily(this);
+        resin.setPrimitiveLogDrops(new ItemStack(this.getPrimitiveLog().orElse(Blocks.AIR)));
+        this.addValidBranches(resin);
     }
 
     public Optional<BranchBlock> getHeartBranch() {
         return Optionals.ofBlock(this.heartBranch);
+    }
+
+    public Optional<BranchBlock> getResinBranch() {
+        return Optionals.ofBlock(this.resinBranch);
     }
 
     public Optional<Block> getPrimitiveHeart() {

@@ -3,8 +3,8 @@ package com.dannykim.dtvanillabackport.block;
 import com.blackgear.vanillabackport.common.level.blockentities.CreakingHeartBlockEntity;
 import com.blackgear.vanillabackport.common.level.blocks.CreakingHeartBlock;
 import com.blackgear.vanillabackport.common.level.blocks.states.CreakingHeartState;
-import com.dtteam.dynamictrees.block.branch.BasicBranchBlock;
 import com.dtteam.dynamictrees.block.branch.BranchBlock;
+import com.dtteam.dynamictrees.block.branch.ThickBranchBlock;
 import com.dannykim.dtvanillabackport.registry.DTVBRegistries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -14,6 +14,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
@@ -27,13 +28,15 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.material.FluidState;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class CreakingHeartBranchBlock extends BasicBranchBlock implements EntityBlock {
+public class CreakingHeartBranchBlock extends ThickBranchBlock implements EntityBlock {
     public static final EnumProperty<CreakingHeartState> STATE = CreakingHeartBlock.STATE;
     public static final BooleanProperty HIDDEN = BooleanProperty.create("hidden");
+    public static final BooleanProperty RESIN = BooleanProperty.create("resin");
 
     public CreakingHeartBranchBlock(final ResourceLocation name, final Properties properties) {
         super(name, properties);
@@ -43,13 +46,14 @@ public class CreakingHeartBranchBlock extends BasicBranchBlock implements Entity
     public BlockState[] createBranchStates(final IntegerProperty radiusProperty, final int maxRadius) {
         this.registerDefaultState(this.defaultBlockState()
                 .setValue(STATE, CreakingHeartState.DORMANT)
-                .setValue(HIDDEN, true));
+                .setValue(HIDDEN, true)
+                .setValue(RESIN, false));
         return super.createBranchStates(radiusProperty, maxRadius);
     }
 
     @Override
-    protected void createBlockStateDefinition(final StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(STATE, HIDDEN);
+    public void createBlockStateDefinition(final StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(STATE, HIDDEN, RESIN);
         super.createBlockStateDefinition(builder);
     }
 
@@ -60,6 +64,7 @@ public class CreakingHeartBranchBlock extends BasicBranchBlock implements Entity
                 ? previousState.getValue(STATE)
                 : CreakingHeartState.DORMANT;
         final boolean previousHidden = !previousState.hasProperty(HIDDEN) || previousState.getValue(HIDDEN);
+        final boolean previousResin = previousState.hasProperty(RESIN) && previousState.getValue(RESIN);
         final int result = super.setRadius(level, pos, radius, originDir, flags);
         final BlockState placedState = level.getBlockState(pos);
         if (placedState.getBlock() == this) {
@@ -67,7 +72,8 @@ public class CreakingHeartBranchBlock extends BasicBranchBlock implements Entity
                     .setValue(STATE, previousHeartState == CreakingHeartState.UPROOTED
                             ? CreakingHeartState.DORMANT
                             : previousHeartState)
-                    .setValue(HIDDEN, previousHidden), flags);
+                    .setValue(HIDDEN, previousHidden)
+                    .setValue(RESIN, previousResin), flags);
         }
         level.scheduleTick(pos, this, 1);
         return result;
@@ -115,6 +121,41 @@ public class CreakingHeartBranchBlock extends BasicBranchBlock implements Entity
             }
         }
         return false;
+    }
+
+    /**
+     * Hidden hearts behave like the 26.1.2 implementation: using an axe peels
+     * away the disguise without replacing the Dynamic Trees branch.
+     */
+    @Override
+    public boolean canBeStripped(final BlockState state, final Level level, final BlockPos pos,
+                                 final Player player, final ItemStack heldItem) {
+        return state.getValue(HIDDEN)
+                && super.canBeStripped(state, level, pos, player, heldItem);
+    }
+
+    @Override
+    public void stripBranch(final BlockState state, final LevelAccessor level,
+                            final BlockPos pos, final int radius) {
+        level.setBlock(pos, state.setValue(HIDDEN, false), 3);
+    }
+
+    /**
+     * The first attempt to break a disguised heart only exposes it.  A second
+     * break then removes the visible heart normally.
+     */
+    @Override
+    public boolean onDestroyedByPlayer(final BlockState state, final Level level,
+                                       final BlockPos pos, final Player player,
+                                       final boolean willHarvest, final FluidState fluid) {
+        if (state.getValue(HIDDEN)) {
+            if (!level.isClientSide) {
+                level.levelEvent(null, 2001, pos, Block.getId(state));
+                level.setBlock(pos, state.setValue(HIDDEN, false), 3);
+            }
+            return false;
+        }
+        return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
     }
 
     @Override
