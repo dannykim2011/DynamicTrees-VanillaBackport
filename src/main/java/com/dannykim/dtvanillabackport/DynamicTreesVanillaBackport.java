@@ -26,7 +26,7 @@ public final class DynamicTreesVanillaBackport {
 
     public DynamicTreesVanillaBackport() {
         final IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> ClientModEvents::registerSpriteSource);
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ClientModEvents.register(eventBus));
         RegistryHandler.setup(MOD_ID);
         DTVBRegistries.setup();
         DTVBRegistries.BLOCK_ENTITY_TYPES.register(eventBus);

@@ -2,8 +2,13 @@ package com.dannykim.dtvanillabackport.client;
 
 import com.mojang.serialization.Codec;
 import com.dannykim.dtvanillabackport.DynamicTreesVanillaBackport;
+import com.dannykim.dtvanillabackport.registry.DTVBRegistries;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.atlas.SpriteSourceType;
 import net.minecraft.client.renderer.texture.atlas.SpriteSources;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 
 import java.lang.reflect.Method;
@@ -12,7 +17,12 @@ public final class ClientModEvents {
     private ClientModEvents() {
     }
 
-    public static void registerSpriteSource() {
+    public static void register(final IEventBus eventBus) {
+        registerSpriteSource();
+        eventBus.addListener(ClientModEvents::clientSetup);
+    }
+
+    private static void registerSpriteSource() {
         if (ThickBranchRingsSource.TYPE != null) {
             return;
         }
@@ -31,5 +41,12 @@ public final class ClientModEvents {
         } catch (ReflectiveOperationException exception) {
             throw new IllegalStateException("Failed to register thick branch rings sprite source", exception);
         }
+    }
+
+    private static void clientSetup(final FMLClientSetupEvent event) {
+        event.enqueueWork(() -> {
+            ItemBlockRenderTypes.setRenderLayer(DTVBRegistries.RESIN_BRANCH.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(DTVBRegistries.CREAKING_HEART_BRANCH.get(), RenderType.cutout());
+        });
     }
 }
