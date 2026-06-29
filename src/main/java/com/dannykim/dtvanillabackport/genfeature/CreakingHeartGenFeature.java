@@ -35,7 +35,7 @@ public class CreakingHeartGenFeature extends GenFeature {
     public GenFeatureConfiguration createDefaultConfiguration() {
         return super.createDefaultConfiguration()
                 .with(MAX_HEIGHT, 8)
-                .with(MAX_RADIUS, 8)
+                .with(MAX_RADIUS, 24)
                 .with(MIN_RADIUS, 6)
                 .with(PLACE_CHANCE, 0.2F)
                 .with(FRUITING_RADIUS, 14);

@@ -9,6 +9,7 @@ import com.ferreusveritas.dynamictrees.tree.family.Family;
 import com.dannykim.dtvanillabackport.DynamicTreesVanillaBackport;
 import com.dannykim.dtvanillabackport.block.CreakingHeartBranchBlock;
 import com.dannykim.dtvanillabackport.block.CreakingHeartBranchBlockEntity;
+import com.dannykim.dtvanillabackport.block.ResinBranchBlock;
 import com.dannykim.dtvanillabackport.genfeature.CreakingHeartGenFeature;
 import com.dannykim.dtvanillabackport.genfeature.VineGenFeature2;
 import com.dannykim.dtvanillabackport.tree.CreakingHeartFamily;
@@ -26,6 +27,7 @@ import java.util.function.Supplier;
 @EventBusSubscriber(modid = DynamicTreesVanillaBackport.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public final class DTVBRegistries {
     public static Supplier<BranchBlock> CREAKING_HEART_BRANCH;
+    public static Supplier<BranchBlock> RESIN_BRANCH;
 
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES =
             DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, DynamicTreesVanillaBackport.MOD_ID);
@@ -46,6 +48,17 @@ public final class DTVBRegistries {
     }
 
     public static void setup() {
+        RESIN_BRANCH = RegistryHandler.addBlock(
+                DynamicTreesVanillaBackport.location("resin_pale_oak_branch"),
+                () -> new ResinBranchBlock(
+                        DynamicTreesVanillaBackport.location("resin_pale_oak"),
+                        BlockBehaviour.Properties.of()
+                                .mapColor(MapColor.WOOD)
+                                .strength(2.0F)
+                                .sound(SoundType.WOOD)
+                                .ignitedByLava()
+                )
+        );
         CREAKING_HEART_BRANCH = RegistryHandler.addBlock(
                 DynamicTreesVanillaBackport.location("pale_oak_creaking_heart_branch"),
                 () -> new CreakingHeartBranchBlock(

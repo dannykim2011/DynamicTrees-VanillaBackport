@@ -1,5 +1,6 @@
 {
   "loader": "dynamictrees:branch",
+  "family": "dtvanillabackport:pale_oak",
   "textures": {
     "bark": "minecraft:block/creaking_heart_dormant",
     "rings": "minecraft:block/creaking_heart_top_dormant"
