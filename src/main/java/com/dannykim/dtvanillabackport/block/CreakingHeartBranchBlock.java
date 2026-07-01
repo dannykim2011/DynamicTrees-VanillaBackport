@@ -3,8 +3,12 @@ package com.dannykim.dtvanillabackport.block;
 import com.blackgear.vanillabackport.common.level.blockentities.CreakingHeartBlockEntity;
 import com.blackgear.vanillabackport.common.level.blocks.CreakingHeartBlock;
 import com.blackgear.vanillabackport.common.level.blocks.states.CreakingHeartState;
+import com.dtteam.dynamictrees.api.network.BranchDestructionData;
 import com.dtteam.dynamictrees.block.branch.BranchBlock;
 import com.dtteam.dynamictrees.block.branch.ThickBranchBlock;
+import com.dtteam.dynamictrees.entity.FallingTreeEntity;
+import com.dtteam.dynamictrees.utility.EntityUtils;
+import com.dtteam.dynamictrees.utility.ItemUtils;
 import com.dannykim.dtvanillabackport.registry.DTVBRegistries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -15,6 +19,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
@@ -97,6 +102,9 @@ public class CreakingHeartBranchBlock extends ThickBranchBlock implements Entity
     public void tick(final BlockState state, final ServerLevel level, final BlockPos pos, final RandomSource random) {
         final BlockState updatedState;
         if (!hasRequiredLogs(state, level, pos)) {
+            if (level.getBlockEntity(pos) instanceof CreakingHeartBlockEntity heart) {
+                heart.removeProtector(null);
+            }
             updatedState = state.setValue(STATE, CreakingHeartState.UPROOTED);
         } else {
             updatedState = state.setValue(
@@ -191,7 +199,25 @@ public class CreakingHeartBranchBlock extends ThickBranchBlock implements Entity
                 && level.getBlockEntity(pos) instanceof CreakingHeartBlockEntity heart) {
             heart.removeProtector(player.damageSources().playerAttack(player));
         }
-        super.futureBreak(state, level, pos, entity);
+
+        final Direction cutDirection = EntityUtils.getHitDirection(entity);
+        level.levelEvent(null, 2001, pos, Block.getId(state));
+        final BranchDestructionData destructionData =
+                this.destroyBranchFromNode(level, pos, cutDirection, false, entity);
+        final ItemStack heldItem = entity.getMainHandItem();
+        final int fortune = ItemUtils.getEnchantmentLevel(
+                Enchantments.FORTUNE, heldItem, level.registryAccess()
+        );
+        destructionData.woodVolume.multiplyVolume(1.0F + 0.25F * fortune);
+        final List<ItemStack> drops =
+                destructionData.species.getBranchesDrops(level, destructionData.woodVolume, heldItem);
+        final Optional<Block> primitiveHeart = this.getPrimitiveLog();
+        if (primitiveHeart.isPresent()
+                && drops.removeIf(stack -> stack.is(primitiveHeart.get().asItem()))) {
+            Block.popResource(level, pos.above(), new ItemStack(primitiveHeart.get()));
+        }
+        FallingTreeEntity.dropTree(level, destructionData, drops, FallingTreeEntity.DestroyType.HARVEST);
+        this.damageAxe(entity, heldItem, this.getRadius(state), destructionData.woodVolume, true);
     }
 
     @Override
