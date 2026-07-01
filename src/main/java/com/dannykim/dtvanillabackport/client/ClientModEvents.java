@@ -2,12 +2,14 @@ package com.dannykim.dtvanillabackport.client;
 
 import com.mojang.serialization.Codec;
 import com.dannykim.dtvanillabackport.DynamicTreesVanillaBackport;
+import com.dannykim.dtvanillabackport.client.model.LayeredBranchModelLoader;
 import com.dannykim.dtvanillabackport.registry.DTVBRegistries;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.atlas.SpriteSourceType;
 import net.minecraft.client.renderer.texture.atlas.SpriteSources;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 
@@ -19,7 +21,12 @@ public final class ClientModEvents {
 
     public static void register(final IEventBus eventBus) {
         registerSpriteSource();
+        eventBus.addListener(ClientModEvents::registerGeometryLoaders);
         eventBus.addListener(ClientModEvents::clientSetup);
+    }
+
+    private static void registerGeometryLoaders(final ModelEvent.RegisterGeometryLoaders event) {
+        event.register("layered_branch", new LayeredBranchModelLoader());
     }
 
     private static void registerSpriteSource() {

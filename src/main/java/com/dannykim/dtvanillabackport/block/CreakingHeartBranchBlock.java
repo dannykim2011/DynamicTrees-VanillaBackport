@@ -104,6 +104,9 @@ public class CreakingHeartBranchBlock extends ThickBranchBlock implements Entity
     public void tick(final BlockState state, final ServerLevel level, final BlockPos pos, final RandomSource random) {
         final BlockState updatedState;
         if (!hasRequiredLogs(state, level, pos)) {
+            if (level.getBlockEntity(pos) instanceof CreakingHeartBlockEntity heart) {
+                heart.removeProtector(null);
+            }
             updatedState = state.setValue(STATE, CreakingHeartState.UPROOTED);
         } else {
             updatedState = state.setValue(

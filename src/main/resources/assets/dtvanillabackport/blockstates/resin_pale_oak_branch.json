@@ -1,14 +1,7 @@
 {
-  "multipart": [
-    {
-      "apply": {
-        "model": "dtvanillabackport:block/resin_pale_oak_branch_base"
-      }
-    },
-    {
-      "apply": {
-        "model": "dtvanillabackport:block/resin_pale_oak_branch_overlay"
-      }
+  "variants": {
+    "": {
+      "model": "dtvanillabackport:block/resin_pale_oak_branch_layered"
     }
-  ]
+  }
 }

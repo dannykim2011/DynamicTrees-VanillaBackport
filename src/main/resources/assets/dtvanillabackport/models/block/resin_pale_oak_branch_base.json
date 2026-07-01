@@ -1,8 +1,0 @@
-{
-  "loader": "dynamictrees:branch",
-  "family": "dtvanillabackport:pale_oak",
-  "textures": {
-    "bark": "minecraft:block/pale_oak_log",
-    "rings": "minecraft:block/pale_oak_log"
-  }
-}

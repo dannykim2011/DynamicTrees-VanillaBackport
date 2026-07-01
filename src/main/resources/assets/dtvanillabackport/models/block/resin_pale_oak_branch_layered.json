@@ -1,0 +1,13 @@
+{
+  "loader": "dtvanillabackport:layered_branch",
+  "family": "dtvanillabackport:pale_oak",
+  "render_type": "minecraft:cutout",
+  "base": {
+    "bark": "minecraft:block/pale_oak_log",
+    "rings": "minecraft:block/pale_oak_log"
+  },
+  "overlay": {
+    "bark": "minecraft:block/resin_clump",
+    "rings": "dynamictrees:block/air"
+  }
+}
