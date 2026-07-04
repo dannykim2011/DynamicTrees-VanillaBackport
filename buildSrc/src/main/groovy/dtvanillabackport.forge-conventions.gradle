@@ -70,6 +70,14 @@ dependencies {
 
 tasks.named('processResources') {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    def replaceProperties = [
+            mod_version: prop('modVersion'),
+            mod_description: prop('mod_description')
+    ]
+    inputs.properties replaceProperties
+    filesMatching('META-INF/mods.toml') {
+        expand replaceProperties
+    }
 }
 
 tasks.withType(Jar).configureEach {
