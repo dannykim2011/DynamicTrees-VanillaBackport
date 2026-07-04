@@ -4,12 +4,10 @@ license="MIT"
 
 [[mods]]
 modId="dtvanillabackport"
-version="${file.jarVersion}"
+version="${mod_version}"
 displayName="Dynamic Trees–VanillaBackport"
 authors="dannykim"
-description='''
-Adds Dynamic Pale Oak trees and Pale Garden integration for Vanilla Backport.
-'''
+description='''${mod_description}'''
 
 [[dependencies.dtvanillabackport]]
 modId="neoforge"
