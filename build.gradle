@@ -3,10 +3,11 @@ plugins {
 }
 
 def prop = { key -> project.findProperty(key).toString() }
+def localVanillaBackportBeta = file('C:/Users/ykkim/AppData/Roaming/ModrinthApp/profiles/NeoForge 1.21.1/mods/VanillaBackport-neoforge-1.21.1-1.2.0.2628.8.jar')
 
 dependencies {
     implementation "maven.modrinth:vdjF5PL5:${prop('dynamicTreesVersionId')}"
-    implementation "maven.modrinth:6xwxDTgf:${prop('vanillaBackportVersionId')}"
+    implementation localVanillaBackportBeta.exists() ? files(localVanillaBackportBeta) : "maven.modrinth:6xwxDTgf:${prop('vanillaBackportVersionId')}"
     implementation "maven.modrinth:i6fiqm5y:${prop('platformVersionId')}"
 }
 

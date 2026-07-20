@@ -1,7 +1,7 @@
 package com.dannykim.dtvanillabackport.block;
 
-import com.blackgear.vanillabackport.common.level.blockentities.CreakingHeartBlockEntity;
-import com.blackgear.vanillabackport.common.registries.ModBlocks;
+import com.blackgear.vanillabackport.common.level.block_entity.CreakingHeartBlockEntity;
+import com.blackgear.vanillabackport.common.registries.blocks.ModBlocks;
 import com.dtteam.dynamictrees.block.branch.BranchBlock;
 import com.dtteam.dynamictrees.tree.TreeHelper;
 import com.dannykim.dtvanillabackport.tree.CreakingHeartFamily;

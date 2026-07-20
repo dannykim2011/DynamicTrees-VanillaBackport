@@ -1,8 +1,8 @@
 package com.dannykim.dtvanillabackport.block;
 
-import com.blackgear.vanillabackport.common.level.blockentities.CreakingHeartBlockEntity;
-import com.blackgear.vanillabackport.common.level.blocks.CreakingHeartBlock;
-import com.blackgear.vanillabackport.common.level.blocks.states.CreakingHeartState;
+import com.blackgear.vanillabackport.common.level.block_entity.CreakingHeartBlockEntity;
+import com.blackgear.vanillabackport.common.level.block.CreakingHeartBlock;
+import com.blackgear.vanillabackport.common.level.block.states.CreakingHeartState;
 import com.dtteam.dynamictrees.api.network.BranchDestructionData;
 import com.dtteam.dynamictrees.block.branch.BranchBlock;
 import com.dtteam.dynamictrees.block.branch.ThickBranchBlock;
