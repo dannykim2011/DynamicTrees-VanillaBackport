@@ -3,7 +3,7 @@ plugins {
 }
 
 def prop = { key -> project.findProperty(key).toString() }
-def localVanillaBackportBeta = file('C:/Users/ykkim/AppData/Roaming/ModrinthApp/profiles/NeoForge 1.21.1/mods/VanillaBackport-neoforge-1.21.1-1.2.0.2628.8.jar')
+def localVanillaBackportBeta = file('C:/Users/ykkim/Downloads/VanillaBackport-neoforge-1.21.1-1.2.0.2629.6.jar')
 
 dependencies {
     implementation "maven.modrinth:vdjF5PL5:${prop('dynamicTreesVersionId')}"
