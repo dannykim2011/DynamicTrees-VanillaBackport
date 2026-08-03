@@ -11,7 +11,7 @@ This addon integrates VanillaBackport's Pale Oak with Dynamic Trees, allowing it
 - 🌱 **Seamless integration** – Includes Dynamic Trees features such as dynamic growth, falling trees, seeds, saplings, and world generation compatibility.
 - ⚡ **Lightweight compatibility addon** – Focused solely on integrating VanillaBackport with Dynamic Trees without changing other gameplay.
 
-## Requirements
+## Required
 
 - Dynamic Trees
 - VanillaBackport
