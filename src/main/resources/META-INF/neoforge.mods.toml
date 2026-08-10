@@ -5,6 +5,7 @@ license="MIT"
 [[mods]]
 modId="dtvanillabackport"
 version="${mod_version}"
+logoFile="dtvanillabackport.png"
 displayName="Dynamic Trees–VanillaBackport"
 authors="dannykim"
 description='''${mod_description}'''

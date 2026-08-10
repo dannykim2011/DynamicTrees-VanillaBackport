@@ -2,7 +2,8 @@ package com.dannykim.dtvanillabackport.block;
 
 import com.blackgear.vanillabackport.common.level.block_entity.CreakingHeartBlockEntity;
 import com.blackgear.vanillabackport.common.level.block.CreakingHeartBlock;
-import com.blackgear.vanillabackport.common.level.block.states.CreakingHeartState;
+import com.blackgear.vanillabackport.common.level.block.CreakingHeartState;
+import com.blackgear.vanillabackport.core.util.WorldUtilities.EnvironmentUtils;
 import com.dtteam.dynamictrees.api.network.BranchDestructionData;
 import com.dtteam.dynamictrees.block.branch.BranchBlock;
 import com.dtteam.dynamictrees.block.branch.ThickBranchBlock;
@@ -109,7 +110,7 @@ public class CreakingHeartBranchBlock extends ThickBranchBlock implements Entity
         } else {
             updatedState = state.setValue(
                     STATE,
-                    CreakingHeartBlock.isNaturalNight(level)
+                    EnvironmentUtils.isNaturalNight(level)
                             ? CreakingHeartState.AWAKE
                             : CreakingHeartState.DORMANT
             );

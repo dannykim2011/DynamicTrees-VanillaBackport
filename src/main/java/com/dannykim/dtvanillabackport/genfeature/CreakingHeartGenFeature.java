@@ -1,6 +1,6 @@
 package com.dannykim.dtvanillabackport.genfeature;
 
-import com.blackgear.vanillabackport.common.level.block.states.CreakingHeartState;
+import com.blackgear.vanillabackport.common.level.block.CreakingHeartState;
 import com.dtteam.dynamictrees.api.configuration.ConfigurationProperty;
 import com.dtteam.dynamictrees.block.branch.BranchBlock;
 import com.dtteam.dynamictrees.systems.genfeature.GenFeature;
