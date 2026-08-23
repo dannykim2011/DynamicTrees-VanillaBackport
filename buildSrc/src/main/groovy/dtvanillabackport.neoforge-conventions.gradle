@@ -8,15 +8,14 @@ plugins {
 
 def prop = { key -> project.findProperty(key).toString() }
 
-def modId = prop('modId')
-def modVersion = prop('modVersion')
-def mcVersion = prop('mcVersion')
+def modId = prop('mod_id')
+def mcVersion = prop('minecraft_version')
 
-version = "${mcVersion}-${modVersion}"
-group = prop('group')
+version = prop('mod_version')
+group = prop('mod_group_id')
 
 base {
-    archivesName = modId
+    archivesName = "${modId}-${mcVersion}"
 }
 
 repositories {
@@ -29,11 +28,11 @@ repositories {
 }
 
 neoForge {
-    version = prop('neoForgeVersion')
+    version = prop('neo_version')
 
     parchment {
-        minecraftVersion = mcVersion
-        mappingsVersion = prop('mappingsVersion')
+        minecraftVersion = prop('parchment_minecraft_version')
+        mappingsVersion = prop('parchment_mappings_version')
     }
 
     runs {
@@ -80,8 +79,17 @@ sourceSets.main.resources {
 tasks.named('processResources') {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     def replaceProperties = [
-            mod_version: prop('modVersion'),
-            mod_description: prop('mod_description')
+            loader_version_range : prop('loader_version_range'),
+            mod_id               : prop('mod_id'),
+            mod_name             : prop('mod_name'),
+            mod_license          : prop('mod_license'),
+            mod_version          : prop('mod_version'),
+            mod_authors          : prop('mod_authors'),
+            mod_description      : prop('mod_description'),
+            minecraft_version_range: prop('minecraft_version_range'),
+            dynamic_trees_version: prop('dynamic_trees_version'),
+            vanilla_backport_version: prop('vanilla_backport_version'),
+            platform_version     : prop('platform_version')
     ]
     inputs.properties replaceProperties
     filesMatching('META-INF/neoforge.mods.toml') {
