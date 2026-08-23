@@ -15,11 +15,11 @@ tasks.named('jar') {
     manifest {
         attributes(
                 'Specification-Title': project.name,
-                'Specification-Vendor': prop('modAuthor'),
+                'Specification-Vendor': prop('mod_authors'),
                 'Specification-Version': '1',
                 'Implementation-Title': project.name,
                 'Implementation-Version': project.version,
-                'Implementation-Vendor': prop('modAuthor'),
+                'Implementation-Vendor': prop('mod_authors'),
                 'Implementation-Timestamp': java.time.format.DateTimeFormatter.ISO_INSTANT.format(java.time.Instant.now()),
                 'MixinConfigs': 'dtvanillabackport.mixins.json'
         )
