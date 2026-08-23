@@ -13,35 +13,35 @@ logoFile="${mod_id}.png"
 authors="${mod_authors}"
 description='''${mod_description}'''
 
-[[dependencies.dtvanillabackport]]
+[[dependencies.${mod_id}]]
 modId="neoforge"
 type="required"
 versionRange="[21.1,)"
 ordering="NONE"
 side="BOTH"
 
-[[dependencies.dtvanillabackport]]
+[[dependencies.${mod_id}]]
 modId="minecraft"
 type="required"
 versionRange="${minecraft_version_range}"
 ordering="NONE"
 side="BOTH"
 
-[[dependencies.dtvanillabackport]]
+[[dependencies.${mod_id}]]
 modId="dynamictrees"
 type="required"
 versionRange="[${dynamic_trees_version},)"
 ordering="AFTER"
 side="BOTH"
 
-[[dependencies.dtvanillabackport]]
+[[dependencies.${mod_id}]]
 modId="vanillabackport"
 type="required"
 versionRange="[${vanilla_backport_version},)"
 ordering="AFTER"
 side="BOTH"
 
-[[dependencies.dtvanillabackport]]
+[[dependencies.${mod_id}]]
 modId="platform"
 type="required"
 versionRange="[${platform_version},)"
