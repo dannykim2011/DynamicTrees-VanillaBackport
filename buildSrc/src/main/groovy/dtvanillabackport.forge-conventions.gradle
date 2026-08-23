@@ -6,14 +6,14 @@ plugins {
 }
 
 def prop = { key -> project.findProperty(key).toString() }
-def modId = prop('modId')
-def mcVersion = prop('mcVersion')
+def modId = prop('mod_id')
+def mcVersion = prop('minecraft_version')
 
-version = "${mcVersion}-${prop('modVersion')}"
-group = prop('group')
+version = prop('mod_version')
+group = prop('mod_group_id')
 
 base {
-    archivesName = modId
+    archivesName = "${modId}-${mcVersion}"
 }
 
 repositories {
@@ -65,14 +65,21 @@ sourceSets.main.resources {
 }
 
 dependencies {
-    minecraft "net.minecraftforge:forge:${mcVersion}-${prop('forgeVersion')}"
+    minecraft "net.minecraftforge:forge:${mcVersion}-${prop('forge_version')}"
 }
 
 tasks.named('processResources') {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     def replaceProperties = [
-            mod_version: prop('modVersion'),
-            mod_description: prop('mod_description')
+            mod_id                : prop('mod_id'),
+            mod_name              : prop('mod_name'),
+            mod_license           : prop('mod_license'),
+            mod_version           : prop('mod_version'),
+            mod_authors           : prop('mod_authors'),
+            mod_description       : prop('mod_description'),
+            dynamic_trees_version : prop('dynamic_trees_version'),
+            vanilla_backport_version: prop('vanilla_backport_version'),
+            platform_version      : prop('platform_version')
     ]
     inputs.properties replaceProperties
     filesMatching('META-INF/mods.toml') {
