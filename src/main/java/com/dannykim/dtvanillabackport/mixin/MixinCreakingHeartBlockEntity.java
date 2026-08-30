@@ -1,6 +1,6 @@
 package com.dannykim.dtvanillabackport.mixin;
 
-import com.blackgear.vanillabackport.common.level.block_entity.CreakingHeartBlockEntity;
+import com.blackgear.vanillabackport.common.level.block_entities.CreakingHeartBlockEntity;
 import com.dannykim.dtvanillabackport.block.CreakingHeartBranchBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;

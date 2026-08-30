@@ -1,6 +1,6 @@
 package com.dannykim.dtvanillabackport.mixin;
 
-import com.blackgear.vanillabackport.common.level.block.CreakingHeartBlock;
+import com.blackgear.vanillabackport.common.level.blocks.CreakingHeartBlock;
 import com.dannykim.dtvanillabackport.block.CreakingHeartBranchBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelReader;
