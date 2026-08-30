@@ -7,7 +7,6 @@ import com.dtteam.dynamictrees.utility.Optionals;
 import com.dannykim.dtvanillabackport.registry.DTVBRegistries;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
@@ -38,12 +37,12 @@ public class CreakingHeartFamily extends Family {
     public void bindHeartBranch() {
         final BranchBlock branch = this.heartBranch.get();
         branch.setFamily(this);
-        branch.setPrimitiveLogDrops(new ItemStack(this.primitiveHeart));
+        branch.setCanBeStripped(true);
         this.addValidBranches(branch);
 
         final BranchBlock resin = this.resinBranch.get();
         resin.setFamily(this);
-        resin.setPrimitiveLogDrops(new ItemStack(this.getPrimitiveLog().orElse(Blocks.AIR)));
+        resin.setCanBeStripped(true);
         this.addValidBranches(resin);
     }
 
