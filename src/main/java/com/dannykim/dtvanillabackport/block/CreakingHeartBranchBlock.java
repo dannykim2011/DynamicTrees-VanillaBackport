@@ -5,9 +5,6 @@ import com.blackgear.vanillabackport.common.level.blocks.CreakingHeartBlock;
 import com.blackgear.vanillabackport.common.level.blocks.states.CreakingHeartState;
 import com.ferreusveritas.dynamictrees.block.branch.BranchBlock;
 import com.ferreusveritas.dynamictrees.block.branch.ThickBranchBlock;
-import com.ferreusveritas.dynamictrees.entity.FallingTreeEntity;
-import com.ferreusveritas.dynamictrees.util.BranchDestructionData;
-import com.ferreusveritas.dynamictrees.util.EntityUtils;
 import com.dannykim.dtvanillabackport.registry.DTVBRegistries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -18,8 +15,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
@@ -34,11 +29,8 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.common.ForgeMod;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
 import java.util.Optional;
 
 public class CreakingHeartBranchBlock extends ThickBranchBlock implements EntityBlock {
@@ -193,32 +185,7 @@ public class CreakingHeartBranchBlock extends ThickBranchBlock implements Entity
                 && level.getBlockEntity(pos) instanceof CreakingHeartBlockEntity heart) {
             heart.removeProtector(player.damageSources().playerAttack(player));
         }
-
-        final double reach = entity instanceof Player
-                ? entity.getAttribute(ForgeMod.BLOCK_REACH.get()).getValue()
-                : 5.0D;
-        final BlockHitResult hitResult = EntityUtils.playerRayTrace(entity, reach, 1.0F);
-        final Direction cutDirection = hitResult == null
-                ? Direction.DOWN
-                : entity.isShiftKeyDown()
-                ? hitResult.getDirection().getOpposite()
-                : hitResult.getDirection();
-
-        level.levelEvent(null, 2001, pos, Block.getId(state));
-        final BranchDestructionData destructionData =
-                this.destroyBranchFromNode(level, pos, cutDirection, false, entity);
-        final ItemStack heldItem = entity.getMainHandItem();
-        final int fortune = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_FORTUNE, heldItem);
-        destructionData.woodVolume.multiplyVolume(1.0F + 0.25F * fortune);
-        final List<ItemStack> drops =
-                destructionData.species.getBranchesDrops(level, destructionData.woodVolume, heldItem);
-        final Optional<Block> primitiveHeart = this.getPrimitiveLog();
-        if (primitiveHeart.isPresent()
-                && drops.removeIf(stack -> stack.is(primitiveHeart.get().asItem()))) {
-            Block.popResource(level, pos.above(), new ItemStack(primitiveHeart.get()));
-        }
-        FallingTreeEntity.dropTree(level, destructionData, drops, FallingTreeEntity.DestroyType.HARVEST);
-        this.damageAxe(entity, heldItem, this.getRadius(state), destructionData.woodVolume, true);
+        super.futureBreak(state, level, pos, entity);
     }
 
     @Override
@@ -226,14 +193,5 @@ public class CreakingHeartBranchBlock extends ThickBranchBlock implements Entity
         return Optional.of(BuiltInRegistries.BLOCK.get(
                 new ResourceLocation("minecraft", "creaking_heart")
         ));
-    }
-
-    @Override
-    public float getPrimitiveLogs(final float volume, final List<ItemStack> drops) {
-        final int wholeVolume = (int) volume;
-        if (wholeVolume > 0) {
-            this.getPrimitiveLog().ifPresent(block -> drops.add(new ItemStack(block)));
-        }
-        return volume - wholeVolume;
     }
 }
