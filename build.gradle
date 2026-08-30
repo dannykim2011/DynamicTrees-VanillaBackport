@@ -3,7 +3,7 @@ plugins {
 }
 
 def prop = { key -> project.findProperty(key).toString() }
-def localVanillaBackportBeta = file('C:/Users/ykkim/Downloads/VanillaBackport-forge-1.20.1-1.2.0.2631.3.jar')
+def localVanillaBackportBeta = file('C:/Users/ykkim/Downloads/VanillaBackport-forge-1.20.1-1.2.0.2634.2.jar')
 
 dependencies {
     implementation fg.deobf("maven.modrinth:vdjF5PL5:${prop('dynamicTreesVersionId')}")
