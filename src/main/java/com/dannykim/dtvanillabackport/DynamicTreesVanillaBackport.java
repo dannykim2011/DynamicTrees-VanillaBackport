@@ -30,6 +30,7 @@ public final class DynamicTreesVanillaBackport {
         RegistryHandler.setup(MOD_ID);
         DTVBRegistries.setup();
         DTVBRegistries.BLOCK_ENTITY_TYPES.register(eventBus);
+        DTVBRegistries.LOOT_FUNCTION_TYPES.register(eventBus);
         eventBus.addListener(this::commonSetup);
         eventBus.addListener(this::gatherData);
     }

@@ -12,8 +12,10 @@ import com.dannykim.dtvanillabackport.block.CreakingHeartBranchBlockEntity;
 import com.dannykim.dtvanillabackport.block.ResinBranchBlock;
 import com.dannykim.dtvanillabackport.genfeature.CreakingHeartGenFeature;
 import com.dannykim.dtvanillabackport.genfeature.VineGenFeature2;
+import com.dannykim.dtvanillabackport.loot.function.MultiplyByTotalVolume;
 import com.dannykim.dtvanillabackport.tree.CreakingHeartFamily;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
@@ -31,6 +33,8 @@ public final class DTVBRegistries {
 
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES =
             DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, DynamicTreesVanillaBackport.MOD_ID);
+    public static final DeferredRegister<LootItemFunctionType> LOOT_FUNCTION_TYPES =
+            DeferredRegister.create(Registries.LOOT_FUNCTION_TYPE, "dynamictrees");
 
     public static final Supplier<BlockEntityType<CreakingHeartBranchBlockEntity>> CREAKING_HEART =
             BLOCK_ENTITY_TYPES.register("creaking_heart", () ->
@@ -38,6 +42,9 @@ public final class DTVBRegistries {
                             CreakingHeartBranchBlockEntity::new,
                             CREAKING_HEART_BRANCH.get()
                     ).build(null));
+    public static final Supplier<LootItemFunctionType> MULTIPLY_TOTAL_VOLUME =
+            LOOT_FUNCTION_TYPES.register("multiply_total_volume", () ->
+                    new LootItemFunctionType(new MultiplyByTotalVolume.Serializer()));
 
     public static final GenFeature CREAKING_HEART_GEN_FEATURE =
             new CreakingHeartGenFeature(DynamicTreesVanillaBackport.location("creaking_heart"));

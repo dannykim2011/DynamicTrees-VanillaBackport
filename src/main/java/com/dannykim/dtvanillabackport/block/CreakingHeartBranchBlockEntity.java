@@ -6,6 +6,7 @@ import com.dannykim.dtvanillabackport.registry.DTVBRegistries;
 import com.dannykim.dtvanillabackport.tree.CreakingHeartFamily;
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.block.branch.BranchBlock;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -19,6 +20,8 @@ import java.util.Optional;
 import java.util.Set;
 
 public class CreakingHeartBranchBlockEntity extends CreakingHeartBlockEntity {
+    private long lastGameTimeSpread = Long.MIN_VALUE;
+
     public CreakingHeartBranchBlockEntity(final BlockPos pos, final BlockState state) {
         super(pos, ModBlocks.CREAKING_HEART.get().defaultBlockState());
         ObfuscationReflectionHelper.setPrivateValue(
@@ -35,6 +38,11 @@ public class CreakingHeartBranchBlockEntity extends CreakingHeartBlockEntity {
                 || !(heart.getFamily() instanceof CreakingHeartFamily family)
                 || family.getBranch().isEmpty()
                 || family.getResinBranch().isEmpty()) {
+            return Optional.empty();
+        }
+
+        final long gameTime = level.getGameTime();
+        if (this.lastGameTimeSpread == gameTime) {
             return Optional.empty();
         }
 
@@ -55,12 +63,13 @@ public class CreakingHeartBranchBlockEntity extends CreakingHeartBlockEntity {
                     level.setBlock(this.worldPosition,
                             heartState.setValue(CreakingHeartBranchBlock.RESIN, true), 3);
                 }
+                this.lastGameTimeSpread = gameTime;
                 return Optional.of(pos.immutable());
             }
             if (node.depth() >= 2) {
                 continue;
             }
-            for (final Direction direction : Direction.values()) {
+            for (final Direction direction : Util.shuffledCopy(Direction.values(), level.getRandom())) {
                 final BlockPos neighbour = pos.relative(direction);
                 if (visited.add(neighbour) && TreeHelper.isBranch(level.getBlockState(neighbour))) {
                     queue.addLast(new SearchNode(neighbour, node.depth() + 1));
