@@ -4,12 +4,8 @@ import com.blackgear.vanillabackport.common.level.block_entities.CreakingHeartBl
 import com.blackgear.vanillabackport.common.level.blocks.CreakingHeartBlock;
 import com.blackgear.vanillabackport.common.level.blocks.CreakingHeartState;
 import com.blackgear.vanillabackport.core.util.WorldUtilities.EnvironmentUtils;
-import com.dtteam.dynamictrees.api.network.BranchDestructionData;
 import com.dtteam.dynamictrees.block.branch.BranchBlock;
 import com.dtteam.dynamictrees.block.branch.ThickBranchBlock;
-import com.dtteam.dynamictrees.entity.FallingTreeEntity;
-import com.dtteam.dynamictrees.utility.EntityUtils;
-import com.dtteam.dynamictrees.utility.ItemUtils;
 import com.dannykim.dtvanillabackport.registry.DTVBRegistries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -20,7 +16,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
@@ -37,7 +32,6 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.FluidState;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
 import java.util.Optional;
 
 public class CreakingHeartBranchBlock extends ThickBranchBlock implements EntityBlock {
@@ -200,25 +194,7 @@ public class CreakingHeartBranchBlock extends ThickBranchBlock implements Entity
                 && level.getBlockEntity(pos) instanceof CreakingHeartBlockEntity heart) {
             heart.removeProtector(player.damageSources().playerAttack(player));
         }
-
-        final Direction cutDirection = EntityUtils.getHitDirection(entity);
-        level.levelEvent(null, 2001, pos, Block.getId(state));
-        final BranchDestructionData destructionData =
-                this.destroyBranchFromNode(level, pos, cutDirection, false, entity);
-        final ItemStack heldItem = entity.getMainHandItem();
-        final int fortune = ItemUtils.getEnchantmentLevel(
-                Enchantments.FORTUNE, heldItem, level.registryAccess()
-        );
-        destructionData.woodVolume.multiplyVolume(1.0F + 0.25F * fortune);
-        final List<ItemStack> drops =
-                destructionData.species.getBranchesDrops(level, destructionData.woodVolume, heldItem);
-        final Optional<Block> primitiveHeart = this.getPrimitiveLog();
-        if (primitiveHeart.isPresent()
-                && drops.removeIf(stack -> stack.is(primitiveHeart.get().asItem()))) {
-            Block.popResource(level, pos.above(), new ItemStack(primitiveHeart.get()));
-        }
-        FallingTreeEntity.dropTree(level, destructionData, drops, FallingTreeEntity.DestroyType.HARVEST);
-        this.damageAxe(entity, heldItem, this.getRadius(state), destructionData.woodVolume, true);
+        super.futureBreak(state, level, pos, entity);
     }
 
     @Override
@@ -226,14 +202,5 @@ public class CreakingHeartBranchBlock extends ThickBranchBlock implements Entity
         return Optional.of(BuiltInRegistries.BLOCK.get(
                 ResourceLocation.fromNamespaceAndPath("minecraft", "creaking_heart")
         ));
-    }
-
-    @Override
-    public float getPrimitiveLogs(final float volume, final List<ItemStack> drops) {
-        final int wholeVolume = (int) volume;
-        if (wholeVolume > 0) {
-            this.getPrimitiveLog().ifPresent(block -> drops.add(new ItemStack(block)));
-        }
-        return volume - wholeVolume;
     }
 }
