@@ -29,6 +29,7 @@ public final class DynamicTreesVanillaBackport {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ClientModEvents.register(eventBus));
         RegistryHandler.setup(MOD_ID);
         DTVBRegistries.setup();
+        DTVBRegistries.BLOCKS.register(eventBus);
         DTVBRegistries.BLOCK_ENTITY_TYPES.register(eventBus);
         DTVBRegistries.LOOT_FUNCTION_TYPES.register(eventBus);
         eventBus.addListener(this::commonSetup);

@@ -10,19 +10,28 @@ import com.dannykim.dtvanillabackport.DynamicTreesVanillaBackport;
 import com.dannykim.dtvanillabackport.block.CreakingHeartBranchBlock;
 import com.dannykim.dtvanillabackport.block.CreakingHeartBranchBlockEntity;
 import com.dannykim.dtvanillabackport.block.ResinBranchBlock;
+import com.dannykim.dtvanillabackport.block.DynamicCactusFlowerBlock;
 import com.dannykim.dtvanillabackport.genfeature.CreakingHeartGenFeature;
+import com.dannykim.dtvanillabackport.genfeature.CactusFlowerGenFeature;
 import com.dannykim.dtvanillabackport.genfeature.VineGenFeature2;
+import com.dannykim.dtvanillabackport.resources.CactusFlowerCompatibilityLoader;
 import com.dannykim.dtvanillabackport.loot.function.MultiplyByTotalVolume;
 import com.dannykim.dtvanillabackport.tree.CreakingHeartFamily;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.ModList;
+import com.ferreusveritas.dynamictrees.api.event.AddResourceLoadersEvent;
+import com.ferreusveritas.dynamictrees.resources.Resources;
 import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.function.Supplier;
 
@@ -30,6 +39,18 @@ import java.util.function.Supplier;
 public final class DTVBRegistries {
     public static Supplier<BranchBlock> CREAKING_HEART_BRANCH;
     public static Supplier<BranchBlock> RESIN_BRANCH;
+
+    public static final DeferredRegister<Block> BLOCKS =
+            DeferredRegister.create(ForgeRegistries.BLOCKS, DynamicTreesVanillaBackport.MOD_ID);
+    public static final Supplier<Block> DYNAMIC_CACTUS_FLOWER =
+            BLOCKS.register("dynamic_cactus_flower", () -> new DynamicCactusFlowerBlock(
+                    BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.PLANT)
+                            .noCollission()
+                            .instabreak()
+                            .sound(SoundType.PINK_PETALS)
+                            .pushReaction(PushReaction.DESTROY)
+            ));
 
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES =
             DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, DynamicTreesVanillaBackport.MOD_ID);
@@ -48,6 +69,16 @@ public final class DTVBRegistries {
 
     public static final GenFeature CREAKING_HEART_GEN_FEATURE =
             new CreakingHeartGenFeature(DynamicTreesVanillaBackport.location("creaking_heart"));
+
+    public static final GenFeature CACTUS_FLOWER_GEN_FEATURE =
+            new CactusFlowerGenFeature(DynamicTreesVanillaBackport.location("cactus_flower"), false, false);
+    public static final GenFeature PILLAR_CACTUS_FLOWER_GEN_FEATURE =
+            new CactusFlowerGenFeature(DynamicTreesVanillaBackport.location("pillar_cactus_flower"), true, false);
+    public static final GenFeature PIPE_CACTUS_FLOWER_GEN_FEATURE =
+            new CactusFlowerGenFeature(DynamicTreesVanillaBackport.location("pipe_cactus_flower"), false, true);
+
+    private static final CactusFlowerCompatibilityLoader CACTUS_FLOWER_COMPATIBILITY_LOADER =
+            new CactusFlowerCompatibilityLoader();
 
     public static final GenFeature VINE_GEN_FEATURE_2 =
             new VineGenFeature2(DynamicTreesVanillaBackport.location("vine_gen_feature_2"));
@@ -87,6 +118,16 @@ public final class DTVBRegistries {
     @SubscribeEvent
     public static void registerGenFeatures(final RegistryEvent<GenFeature> event) {
         event.getRegistry().register(CREAKING_HEART_GEN_FEATURE);
+        event.getRegistry().register(CACTUS_FLOWER_GEN_FEATURE);
+        event.getRegistry().register(PILLAR_CACTUS_FLOWER_GEN_FEATURE);
+        event.getRegistry().register(PIPE_CACTUS_FLOWER_GEN_FEATURE);
         event.getRegistry().register(VINE_GEN_FEATURE_2);
+    }
+
+    @SubscribeEvent
+    public static void addResourceLoaders(final AddResourceLoadersEvent event) {
+        if (ModList.get().isLoaded("dynamictreesplus")) {
+            event.getResourceManager().addLoaderAfter(CACTUS_FLOWER_COMPATIBILITY_LOADER, Resources.SPECIES_LOADER);
+        }
     }
 }
