@@ -80,6 +80,7 @@ tasks.named('processResources') {
             mod_description         : prop('mod_description'),
             minecraft_version_range : prop('minecraft_version_range'),
             dynamic_trees_version   : prop('dynamic_trees_version'),
+            dynamic_trees_plus_version: prop('dynamic_trees_plus_version'),
             vanilla_backport_version: prop('vanilla_backport_version'),
             platform_version        : prop('platform_version')
     ]
