@@ -42,6 +42,13 @@ ordering="AFTER"
 side="BOTH"
 
 [[dependencies.${mod_id}]]
+modId="dynamictreesplus"
+type="optional"
+versionRange="[${dynamic_trees_plus_version},)"
+ordering="AFTER"
+side="BOTH"
+
+[[dependencies.${mod_id}]]
 modId="platform"
 type="required"
 versionRange="[${platform_version},)"

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "pillar=false,pipe=false": {
+      "model": "dtvanillabackport:block/dynamic_cactus_flower"
+    },
+    "pillar=true,pipe=false": {
+      "model": "dtvanillabackport:block/pillar_cactus_flower"
+    },
+    "pillar=false,pipe=true": {
+      "model": "dtvanillabackport:block/pipe_cactus_flower"
+    },
+    "pillar=true,pipe=true": {
+      "model": "dtvanillabackport:block/pipe_cactus_flower"
+    }
+  }
+}
