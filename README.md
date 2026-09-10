@@ -9,9 +9,13 @@ This addon integrates VanillaBackport's Pale Oak with Dynamic Trees, allowing it
 - 🌳 **Dynamic Trees compatibility for VanillaBackport's Pale Oak** – Makes Pale Oak grow, branch, and behave like a native Dynamic Trees species.
 - ❤️ **Full Creaking Heart support** – Creaking Hearts generate and function naturally with Dynamic Trees' Pale Oak, preserving VanillaBackport's intended gameplay and mechanics.
 - 🌱 **Seamless integration** – Includes Dynamic Trees features such as dynamic growth, falling trees, seeds, saplings, and world generation compatibility.
-- ⚡ **Lightweight compatibility addon** – Focused solely on integrating VanillaBackport with Dynamic Trees without changing other gameplay.
+- 🌵 **Cactus Flower support** – VanillaBackport's Cactus Flowers can be found on world-generated Pillar and Pipe Cacti in deserts when Dynamic Trees Plus is installed.
 
 ## Required
 
 - Dynamic Trees
 - VanillaBackport
+
+## Optional
+
+- Dynamic Trees Plus

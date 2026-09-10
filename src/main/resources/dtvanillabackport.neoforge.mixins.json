@@ -4,6 +4,7 @@
   "package": "com.dannykim.dtvanillabackport.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "MixinCactusFlowerBlock",
     "MixinCreakingHeartBlock",
     "MixinCreakingHeartBlockEntity"
   ],

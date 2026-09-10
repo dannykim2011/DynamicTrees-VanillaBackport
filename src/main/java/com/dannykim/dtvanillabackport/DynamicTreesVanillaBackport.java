@@ -23,6 +23,7 @@ public final class DynamicTreesVanillaBackport {
     public DynamicTreesVanillaBackport(final IEventBus eventBus) {
         NeoForgeRegistryHandler.setup(MOD_ID, eventBus);
         DTVBRegistries.setup();
+        DTVBRegistries.BLOCKS.register(eventBus);
         DTVBRegistries.BLOCK_ENTITY_TYPES.register(eventBus);
         DTVBRegistries.LOOT_FUNCTION_TYPES.register(eventBus);
         eventBus.addListener(this::commonSetup);

@@ -35,6 +35,13 @@ ordering="AFTER"
 side="BOTH"
 
 [[dependencies.${mod_id}]]
+modId="dynamictreesplus"
+type="optional"
+versionRange="[${dynamic_trees_plus_version},)"
+ordering="AFTER"
+side="BOTH"
+
+[[dependencies.${mod_id}]]
 modId="vanillabackport"
 type="required"
 versionRange="[${vanilla_backport_version},)"
