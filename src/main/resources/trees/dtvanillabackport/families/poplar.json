@@ -1,0 +1,6 @@
+{
+  "common_leaves": "dtvanillabackport:orange_poplar",
+  "common_species": "dtvanillabackport:orange_poplar",
+  "primitive_log": "minecraft:poplar_log",
+  "primitive_stripped_log": "minecraft:stripped_poplar_log"
+}

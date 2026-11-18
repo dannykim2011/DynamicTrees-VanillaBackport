@@ -1,3 +1,7 @@
-// 1.21.1	2026-06-26T06:35:10.9690982	Item Models: dtvanillabackport
+// 1.21.1	2026-11-18T12:55:38.961545	Item Models: dtvanillabackport
+1bd5a345c270ac9ecafcc7ec0ce5b29c84ff0a24 assets/dtvanillabackport/models/item/orange_poplar_seed.json
 6fafc843198d2b5db7e89557653630cbf815107c assets/dtvanillabackport/models/item/pale_oak_branch.json
 409bd3c9805f2e5782f9c10270bf0532d1753332 assets/dtvanillabackport/models/item/pale_oak_seed.json
+239b1c3a82de8028e2c4692e9c005c2c36836de6 assets/dtvanillabackport/models/item/poplar_branch.json
+2b2136d9ef9d9ceeef3298b5bd56c67630b26ed8 assets/dtvanillabackport/models/item/red_poplar_seed.json
+b787a63a0290ee05bd7081f1aa26b7eec8ab98c8 assets/dtvanillabackport/models/item/yellow_poplar_seed.json

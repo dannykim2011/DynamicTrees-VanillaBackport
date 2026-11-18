@@ -1,0 +1,7 @@
+{
+  "parent": "dynamictrees:item/branch",
+  "textures": {
+    "bark": "minecraft:block/poplar_log",
+    "rings": "minecraft:block/poplar_log_top"
+  }
+}

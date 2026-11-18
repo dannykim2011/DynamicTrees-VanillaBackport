@@ -190,11 +190,22 @@ public class CreakingHeartBranchBlock extends ThickBranchBlock implements Entity
 
     @Override
     public void futureBreak(final BlockState state, final Level level, final BlockPos pos, final LivingEntity entity) {
-        if (entity instanceof Player player
+        if (!level.isClientSide && entity instanceof Player player
                 && level.getBlockEntity(pos) instanceof CreakingHeartBlockEntity heart) {
             heart.removeProtector(player.damageSources().playerAttack(player));
         }
         super.futureBreak(state, level, pos, entity);
+    }
+
+    @Override
+    public void onRemove(final BlockState state, final Level level, final BlockPos pos,
+                         final BlockState newState, final boolean movedByPiston) {
+        // DT may fell this heart from a cut elsewhere in the branch network.
+        if (!level.isClientSide && !state.is(newState.getBlock())
+                && level.getBlockEntity(pos) instanceof CreakingHeartBlockEntity heart) {
+            heart.removeProtector(level.damageSources().generic());
+        }
+        super.onRemove(state, level, pos, newState, movedByPiston);
     }
 
     @Override

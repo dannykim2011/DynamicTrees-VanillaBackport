@@ -1,5 +1,5 @@
-// 1.21.1	2026-06-26T06:35:10.9670925	dtvanillabackport DT Block Tags
-57c9adaa580c6a1117994da83c40183784e3bdd4 data/dynamictrees/tags/block/branches_that_burn.json
-16dcba63147614cc0fa117f2b18ae014dd4de621 data/dynamictrees/tags/block/leaves.json
-db01956a6f63614f10b98e859911cb1e13b0961a data/dynamictrees/tags/block/saplings.json
-ee85dfaf581fa49c786f52dcfe4d8bf579361688 data/dynamictrees/tags/block/stripped_branches_that_burn.json
+// 1.21.1	2026-11-18T12:55:38.9595433	dtvanillabackport DT Block Tags
+9fff3da5e605a74c76f8a2985835fe3c8593248c data/dynamictrees/tags/block/branches_that_burn.json
+67d8665536952f70df7a5d339fd41f537deb2ef5 data/dynamictrees/tags/block/leaves.json
+395cf94b1f753914b2629d78953a6f30c894f1fa data/dynamictrees/tags/block/saplings.json
+36e2c2b5ba6cca994ad179daaf5847b7b1f6073f data/dynamictrees/tags/block/stripped_branches_that_burn.json
