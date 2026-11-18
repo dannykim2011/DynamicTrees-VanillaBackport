@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "dtvanillabackport:block/poplar_branch"
+    }
+  }
+}

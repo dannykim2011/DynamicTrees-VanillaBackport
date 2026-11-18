@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "dynamictreesplus:cactus_branch"
+    {
+      "id": "dynamictreesplus:cactus_branch",
+      "required": false
+    }
   ]
 }

@@ -16,5 +16,22 @@
                                   },
                       "multipass":  true
                   }
+    },
+    {
+      "select": {
+        "name": "minecraft:dappled_forest"
+      },
+      "apply": {
+        "species": {
+          "random": {
+            "dtvanillabackport:red_poplar": 200,
+            "dtvanillabackport:orange_poplar": 240,
+            "dtvanillabackport:yellow_poplar": 90,
+            "dynamictrees:spruce": 27
+          }
+        },
+        "density": [1.0],
+        "chance": 1
+      }
     }
 ]

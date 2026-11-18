@@ -1,5 +1,6 @@
 package com.dannykim.dtvanillabackport;
 
+import com.dannykim.dtvanillabackport.data.TreeBlockLangGenerator;
 import com.ferreusveritas.dynamictrees.block.leaves.LeavesProperties;
 import com.ferreusveritas.dynamictrees.block.rooty.SoilProperties;
 import com.ferreusveritas.dynamictrees.api.GatherDataHelper;
@@ -46,6 +47,7 @@ public final class DynamicTreesVanillaBackport {
 
     private void gatherData(final GatherDataEvent event) {
         Resources.MANAGER.gatherData();
+        GatherDataHelper.addLangGenerator(MOD_ID, new TreeBlockLangGenerator());
         GatherDataHelper.gatherAllData(
                 MOD_ID,
                 event,

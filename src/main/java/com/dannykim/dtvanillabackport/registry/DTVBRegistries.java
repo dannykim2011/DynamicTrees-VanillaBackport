@@ -1,5 +1,7 @@
 package com.dannykim.dtvanillabackport.registry;
 
+import com.dannykim.dtvanillabackport.growthlogic.PoplarGrowthLogic;
+import com.ferreusveritas.dynamictrees.growthlogic.GrowthLogicKit;
 import com.ferreusveritas.dynamictrees.api.registry.RegistryEvent;
 import com.ferreusveritas.dynamictrees.api.registry.TypeRegistryEvent;
 import com.ferreusveritas.dynamictrees.api.registry.RegistryHandler;
@@ -113,6 +115,11 @@ public final class DTVBRegistries {
     @SubscribeEvent
     public static void registerFamilyTypes(final TypeRegistryEvent<Family> event) {
         event.registerType(DynamicTreesVanillaBackport.location("creaking_heart"), CreakingHeartFamily.TYPE);
+    }
+
+    @SubscribeEvent
+    public static void registerGrowthLogic(final RegistryEvent<GrowthLogicKit> event) {
+        event.getRegistry().register(new PoplarGrowthLogic(DynamicTreesVanillaBackport.location("poplar")));
     }
 
     @SubscribeEvent

@@ -1,5 +1,20 @@
 {
+  "block.dtvanillabackport.orange_poplar_leaves": "Orange Poplar Leaves",
+  "block.dtvanillabackport.orange_poplar_sapling": "Orange Poplar Sapling",
   "block.dtvanillabackport.pale_oak_branch": "Pale Oak Tree",
+  "block.dtvanillabackport.pale_oak_leaves": "Pale Oak Leaves",
+  "block.dtvanillabackport.pale_oak_sapling": "Pale Oak Sapling",
+  "block.dtvanillabackport.poplar_branch": "Poplar Tree",
+  "block.dtvanillabackport.red_poplar_leaves": "Red Poplar Leaves",
+  "block.dtvanillabackport.red_poplar_sapling": "Red Poplar Sapling",
+  "block.dtvanillabackport.yellow_poplar_leaves": "Yellow Poplar Leaves",
+  "block.dtvanillabackport.yellow_poplar_sapling": "Yellow Poplar Sapling",
+  "item.dtvanillabackport.orange_poplar_seed": "Orange Poplar Seed",
   "item.dtvanillabackport.pale_oak_seed": "Pale Oak Acorn",
-  "species.dtvanillabackport.pale_oak": "Pale Oak"
+  "item.dtvanillabackport.red_poplar_seed": "Red Poplar Seed",
+  "item.dtvanillabackport.yellow_poplar_seed": "Yellow Poplar Seed",
+  "species.dtvanillabackport.orange_poplar": "Orange Poplar",
+  "species.dtvanillabackport.pale_oak": "Pale Oak",
+  "species.dtvanillabackport.red_poplar": "Red Poplar",
+  "species.dtvanillabackport.yellow_poplar": "Yellow Poplar"
 }
