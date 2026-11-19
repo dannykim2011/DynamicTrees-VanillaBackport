@@ -4,8 +4,6 @@ Bring Dynamic Trees support to the Pale Oak and Poplar trees added by VanillaBac
 
 This addon integrates VanillaBackport's Pale Oak and Poplar with Dynamic Trees, allowing them to behave just like native Dynamic Trees species. Instead of using the standard vanilla tree system, Pale Oak and Poplar will grow, branch, and interact with the world using Dynamic Trees' mechanics while preserving the gameplay experience intended by VanillaBackport.
 
-> Poplar canopies may differ from their VanillaBackport counterparts, and shelf mushroom decorations are not yet included.
-
 ## Features
 
 - 🌳 **Pale Oak and Poplar support** – Pale Oak and the red, orange, and yellow Poplars grow and branch as Dynamic Trees species.

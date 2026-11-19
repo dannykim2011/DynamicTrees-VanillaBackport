@@ -1,6 +1,11 @@
 package com.dannykim.dtvanillabackport.registry;
 
+import com.blackgear.vanillabackport.client.registries.ModSoundTypes;
+import com.dannykim.dtvanillabackport.block.PoplarShelfMushroomBlock;
+import com.dannykim.dtvanillabackport.genfeature.PoplarShelfMushroomGenFeature;
 import com.dannykim.dtvanillabackport.growthlogic.PoplarGrowthLogic;
+import com.dannykim.dtvanillabackport.cell.PoplarCellKit;
+import com.dtteam.dynamictrees.api.cell.CellKit;
 import com.dtteam.dynamictrees.systems.growthlogic.GrowthLogicKit;
 import com.dtteam.dynamictrees.event.RegistryEvent;
 import com.dtteam.dynamictrees.event.TypeRegistryEvent;
@@ -19,6 +24,7 @@ import com.dannykim.dtvanillabackport.genfeature.VineGenFeature2;
 import com.dannykim.dtvanillabackport.resources.CactusFlowerCompatibilityLoader;
 import com.dannykim.dtvanillabackport.loot.function.MultiplyByTotalVolume;
 import com.dannykim.dtvanillabackport.tree.CreakingHeartFamily;
+import com.dannykim.dtvanillabackport.tree.PoplarFamily;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 import net.minecraft.world.level.block.SoundType;
@@ -43,6 +49,9 @@ public final class DTVBRegistries {
 
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(Registries.BLOCK, DynamicTreesVanillaBackport.MOD_ID);
+    public static final Supplier<Block> POPLAR_SHELF_MUSHROOM = BLOCKS.register("poplar_shelf_mushroom",
+            () -> new PoplarShelfMushroomBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_YELLOW)
+                    .sound(ModSoundTypes.SHELF_MUSHROOM).noOcclusion().pushReaction(PushReaction.DESTROY)));
     public static final Supplier<Block> DYNAMIC_CACTUS_FLOWER =
             BLOCKS.register("dynamic_cactus_flower", () -> new DynamicCactusFlowerBlock(
                     BlockBehaviour.Properties.of()
@@ -68,6 +77,8 @@ public final class DTVBRegistries {
             LOOT_FUNCTION_TYPES.register("multiply_total_volume", () ->
                     new LootItemFunctionType<>(MultiplyByTotalVolume.CODEC));
 
+    public static final GenFeature POPLAR_SHELF_MUSHROOM_FEATURE =
+            new PoplarShelfMushroomGenFeature(DynamicTreesVanillaBackport.location("poplar_shelf_mushroom"));
     public static final GenFeature CREAKING_HEART_GEN_FEATURE =
             new CreakingHeartGenFeature(DynamicTreesVanillaBackport.location("creaking_heart"));
 
@@ -115,6 +126,14 @@ public final class DTVBRegistries {
     public static void registerFamilyTypes(final TypeRegistryEvent<Family> event) {
         if (event.isEntryOfType(Family.class)) {
             event.registerType(DynamicTreesVanillaBackport.location("creaking_heart"), CreakingHeartFamily.TYPE);
+            event.registerType(DynamicTreesVanillaBackport.location("poplar"), PoplarFamily.TYPE);
+        }
+    }
+
+    @SubscribeEvent
+    public static void registerCellKits(final RegistryEvent<CellKit> event) {
+        if (event.isEntryOfType(CellKit.class)) {
+            event.getRegistry().register(new PoplarCellKit(DynamicTreesVanillaBackport.location("poplar")));
         }
     }
 
@@ -128,6 +147,7 @@ public final class DTVBRegistries {
     @SubscribeEvent
     public static void registerGenFeatures(final RegistryEvent<GenFeature> event) {
         if (event.isEntryOfType(GenFeature.class)) {
+            event.getRegistry().register(POPLAR_SHELF_MUSHROOM_FEATURE);
             event.getRegistry().register(CREAKING_HEART_GEN_FEATURE);
             event.getRegistry().register(CACTUS_FLOWER_GEN_FEATURE);
             event.getRegistry().register(PILLAR_CACTUS_FLOWER_GEN_FEATURE);

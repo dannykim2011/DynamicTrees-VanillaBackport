@@ -30,7 +30,7 @@
             "dynamictrees:spruce": 27
           }
         },
-        "density": "noise()",
+        "density": "noise() * 0.32 + 0.28",
         "chance": 1
       }
     }

@@ -1,0 +1,184 @@
+{
+  "variants": {
+    "age=0,facing=north,support_radius=3": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage0_r3"
+    },
+    "age=0,facing=east,support_radius=3": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage0_r3",
+      "y": 90
+    },
+    "age=0,facing=south,support_radius=3": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage0_r3",
+      "y": 180
+    },
+    "age=0,facing=west,support_radius=3": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage0_r3",
+      "y": 270
+    },
+    "age=0,facing=north,support_radius=4": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage0_r4"
+    },
+    "age=0,facing=east,support_radius=4": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage0_r4",
+      "y": 90
+    },
+    "age=0,facing=south,support_radius=4": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage0_r4",
+      "y": 180
+    },
+    "age=0,facing=west,support_radius=4": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage0_r4",
+      "y": 270
+    },
+    "age=0,facing=north,support_radius=5": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage0_r5"
+    },
+    "age=0,facing=east,support_radius=5": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage0_r5",
+      "y": 90
+    },
+    "age=0,facing=south,support_radius=5": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage0_r5",
+      "y": 180
+    },
+    "age=0,facing=west,support_radius=5": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage0_r5",
+      "y": 270
+    },
+    "age=0,facing=north,support_radius=6": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage0_r6"
+    },
+    "age=0,facing=east,support_radius=6": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage0_r6",
+      "y": 90
+    },
+    "age=0,facing=south,support_radius=6": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage0_r6",
+      "y": 180
+    },
+    "age=0,facing=west,support_radius=6": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage0_r6",
+      "y": 270
+    },
+    "age=0,facing=north,support_radius=7": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage0_r7"
+    },
+    "age=0,facing=east,support_radius=7": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage0_r7",
+      "y": 90
+    },
+    "age=0,facing=south,support_radius=7": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage0_r7",
+      "y": 180
+    },
+    "age=0,facing=west,support_radius=7": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage0_r7",
+      "y": 270
+    },
+    "age=0,facing=north,support_radius=8": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage0_r8"
+    },
+    "age=0,facing=east,support_radius=8": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage0_r8",
+      "y": 90
+    },
+    "age=0,facing=south,support_radius=8": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage0_r8",
+      "y": 180
+    },
+    "age=0,facing=west,support_radius=8": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage0_r8",
+      "y": 270
+    },
+    "age=1,facing=north,support_radius=3": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage1_r3"
+    },
+    "age=1,facing=east,support_radius=3": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage1_r3",
+      "y": 90
+    },
+    "age=1,facing=south,support_radius=3": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage1_r3",
+      "y": 180
+    },
+    "age=1,facing=west,support_radius=3": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage1_r3",
+      "y": 270
+    },
+    "age=1,facing=north,support_radius=4": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage1_r4"
+    },
+    "age=1,facing=east,support_radius=4": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage1_r4",
+      "y": 90
+    },
+    "age=1,facing=south,support_radius=4": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage1_r4",
+      "y": 180
+    },
+    "age=1,facing=west,support_radius=4": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage1_r4",
+      "y": 270
+    },
+    "age=1,facing=north,support_radius=5": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage1_r5"
+    },
+    "age=1,facing=east,support_radius=5": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage1_r5",
+      "y": 90
+    },
+    "age=1,facing=south,support_radius=5": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage1_r5",
+      "y": 180
+    },
+    "age=1,facing=west,support_radius=5": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage1_r5",
+      "y": 270
+    },
+    "age=1,facing=north,support_radius=6": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage1_r6"
+    },
+    "age=1,facing=east,support_radius=6": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage1_r6",
+      "y": 90
+    },
+    "age=1,facing=south,support_radius=6": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage1_r6",
+      "y": 180
+    },
+    "age=1,facing=west,support_radius=6": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage1_r6",
+      "y": 270
+    },
+    "age=1,facing=north,support_radius=7": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage1_r7"
+    },
+    "age=1,facing=east,support_radius=7": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage1_r7",
+      "y": 90
+    },
+    "age=1,facing=south,support_radius=7": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage1_r7",
+      "y": 180
+    },
+    "age=1,facing=west,support_radius=7": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage1_r7",
+      "y": 270
+    },
+    "age=1,facing=north,support_radius=8": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage1_r8"
+    },
+    "age=1,facing=east,support_radius=8": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage1_r8",
+      "y": 90
+    },
+    "age=1,facing=south,support_radius=8": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage1_r8",
+      "y": 180
+    },
+    "age=1,facing=west,support_radius=8": {
+      "model": "dtvanillabackport:block/poplar_shelf_mushroom_stage1_r8",
+      "y": 270
+    }
+  }
+}
