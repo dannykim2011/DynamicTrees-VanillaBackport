@@ -15,15 +15,20 @@ public final class PoplarGrowthLogic extends GrowthLogicKit {
         super(name);
     }
 
-    // VB places its lateral logs at one level, four blocks below the trunk tip.
-    private static int trunkHeight(BlockPos root) {
-        return 7 + Math.floorMod(Mth.getSeed(root), 5);
+    // Keep the original lower crown elevation and end the leader one block above it.
+    private static int crownBaseHeight(BlockPos root) {
+        return 3 + Math.floorMod(Mth.getSeed(root), 5);
     }
+
+    // Each row contains every direction mask for the same number of arms.
+    private static final int[][] ARM_MASKS = {
+            {1, 2, 4, 8}, {3, 5, 6, 9, 10, 12}, {7, 11, 13, 14}, {15}
+    };
 
     @Override
     public float getEnergy(GrowthLogicKitConfiguration config, PositionalSpeciesContext context) {
         // A signal spends its first step entering the trunk base.
-        return trunkHeight(context.pos()) + 1;
+        return crownBaseHeight(context.pos()) + 2;
     }
 
     @Override
@@ -32,7 +37,14 @@ public final class PoplarGrowthLogic extends GrowthLogicKit {
         if (context.signal().isInTrunk() && direction.getAxis().isHorizontal()) {
             // Each arm has its own short growth budget to support the broad, uneven crown.
             long armSeed = Mth.getSeed(context.signal().rootPos.relative(direction));
-            context.signal().energy = Math.min(context.signal().energy, 1 + Math.floorMod(armSeed, 5));
+            context.signal().energy = 2 + Math.floorMod(armSeed, 4);
+        }
+        // DT defaults to UP when no direction has weight. End a blocked signal in
+        // its incoming branch so this fallback cannot start a second leader.
+        if (direction == Direction.UP && context.pos().getY() >=
+                context.signal().rootPos.getY() + crownBaseHeight(context.signal().rootPos) + 1) {
+            context.signal().energy = 0;
+            return context.signal().dir.getOpposite();
         }
         return direction;
     }
@@ -42,9 +54,11 @@ public final class PoplarGrowthLogic extends GrowthLogicKit {
         int[] weights = super.populateDirectionProbabilityMap(config, context);
         BlockPos root = context.signal().rootPos;
         BlockPos pos = context.pos();
-        int crownBase = trunkHeight(root) - 4;
+        int crownBase = crownBaseHeight(root);
         int height = pos.getY() - root.getY();
-        int crownSides = 1 + Math.floorMod(Mth.getSeed(root) >> 8, 15);
+        long seed = Mth.getSeed(root);
+        int[] masks = ARM_MASKS[(int) (seed >>> 8) & 3];
+        int crownSides = masks[Math.floorMod(seed >> 16, masks.length)];
         for (Direction side : Direction.Plane.HORIZONTAL) {
             if (context.signal().isInTrunk()) {
                 if (height != crownBase || (crownSides & (1 << side.get2DDataValue())) == 0) {
@@ -61,6 +75,7 @@ public final class PoplarGrowthLogic extends GrowthLogicKit {
                 }
             }
         }
+        if (height >= crownBase + 1) weights[Direction.UP.ordinal()] = 0;
         weights[Direction.DOWN.ordinal()] = 0;
         return weights;
     }

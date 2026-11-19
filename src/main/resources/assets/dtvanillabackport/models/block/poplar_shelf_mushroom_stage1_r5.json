@@ -1,0 +1,143 @@
+{
+  "parent": "minecraft:block/shelf_mushroom_stage1",
+  "elements": [
+    {
+      "name": "mushroom_top",
+      "from": [
+        3,
+        8,
+        10.5
+      ],
+      "to": [
+        13,
+        10.55,
+        19
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            7,
+            3,
+            14,
+            4.5
+          ],
+          "texture": "#large"
+        },
+        "east": {
+          "uv": [
+            7,
+            0,
+            12,
+            1.5
+          ],
+          "texture": "#large"
+        },
+        "south": {
+          "uv": [
+            7,
+            4.5,
+            14,
+            6
+          ],
+          "texture": "#large"
+        },
+        "west": {
+          "uv": [
+            7,
+            1.5,
+            12,
+            3
+          ],
+          "texture": "#large"
+        },
+        "up": {
+          "uv": [
+            7,
+            5,
+            0,
+            0
+          ],
+          "texture": "#large"
+        },
+        "down": {
+          "uv": [
+            7,
+            5,
+            0,
+            10
+          ],
+          "texture": "#large"
+        }
+      }
+    },
+    {
+      "name": "mushroom_bottom",
+      "from": [
+        5.142857,
+        6.3,
+        13.9
+      ],
+      "to": [
+        10.857143,
+        8,
+        19
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            12,
+            8,
+            13
+          ],
+          "texture": "#large"
+        },
+        "east": {
+          "uv": [
+            4,
+            10,
+            7,
+            11
+          ],
+          "texture": "#large"
+        },
+        "south": {
+          "uv": [
+            4,
+            13,
+            8,
+            14
+          ],
+          "texture": "#large"
+        },
+        "west": {
+          "uv": [
+            4,
+            11,
+            7,
+            12
+          ],
+          "texture": "#large"
+        },
+        "up": {
+          "uv": [
+            4,
+            13,
+            0,
+            10
+          ],
+          "texture": "#large"
+        },
+        "down": {
+          "uv": [
+            4,
+            13,
+            0,
+            16
+          ],
+          "texture": "#large"
+        }
+      }
+    }
+  ]
+}
