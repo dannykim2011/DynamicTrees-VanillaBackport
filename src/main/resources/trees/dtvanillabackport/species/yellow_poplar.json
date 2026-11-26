@@ -6,6 +6,9 @@
   "lowest_branch_height": 3,
   "growth_rate": 1,
   "generate_seed": true,
+  "lang_overrides": {
+    "seed": "Yellow Poplar Acorn"
+  },
   "generate_sapling": true,
   "preferred_climate": "temperate",
   "climate_tolerance": 0.5,
